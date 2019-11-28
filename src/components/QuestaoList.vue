@@ -2,15 +2,15 @@
 <div class="row">
     <div class="columns">
       <div class="column">
-        <div class="field is-grouped"  v-for="(tarefa, index) in tarefas">
+        <div class="field is-grouped" v-for="(questao, index) in questoes">
           <p class="control">
             <a class="button is-rounded is-small check-button" @click="check(index)">
               <span class="icon is-small">
               </span>
             </a>
           </p>
-          <p class="control is-expanded" :class="{'checked': tarefa.checked }">
-            {{tarefa.description}}
+          <p class="control is-expanded" :class="{'checked': questao.checked }">
+            {{questao.description}}
           </p>
           <p class="control">
             <a class="button is-danger is-small"  @click="remover(index)">
@@ -27,8 +27,8 @@
 
 <script>
 export default {
-  name: 'todo-list',
-  props: ['tarefas'],
+  name: 'questao-list',
+  props: ['questoes'],
   data () {
     return {
     }

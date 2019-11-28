@@ -4,15 +4,16 @@
       <div class="column  is-half is-offset-one-quarter">
         <div class="field is-grouped">
           <p class="control is-expanded">
-             <input class="input is-primary has-text-centered" type="text" placeholder="Nova tarefa..." v-model="tarefa">
+              <textarea class="textarea is-primary" rows="3" placeholder="Primary textarea"></textarea>
+             <!-- <input class="input is-primary has-text-centered" type="text" placeholder="Nova questão..." v-model="questao"> -->
           </p>
-          <p class="control">
-            <a class="button is-success add-button" @click="enviarTarefa">
+          <!-- <p class="control">
+            <a class="button is-success add-button" @click="enviarQuestao">
               <span class="icon is-small">
                 <i class="fa fa-plus"></i>
               </span>
             </a>
-          </p>
+          </p> -->
         </div>
       </div>
     </div>
@@ -21,18 +22,18 @@
 
 <script>
 export default {
-  name: 'novo-todo',
+  name: 'questao-card',
   data () {
     return {
-      tarefa: ''
+      questao: ''
     }
   },
   methods: {
-    enviarTarefa(){
-      if(this.tarefa != ''){
-        this.$emit('novaTarefa', this.tarefa)
+    enviarQuestao(){
+      if(this.questao != ''){
+        this.$emit('novaQuestao', this.questao)
       }
-      this.tarefa = ''
+      this.questao = ''
     }
   }
 }

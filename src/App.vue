@@ -20,7 +20,9 @@
           <div class="row">
             <div class="columns">
               <div class="column is-half is-offset-one-quarter">
-                <todo-card></todo-card>
+                <questao-view-card></questao-view-card>
+                <questao-view-card style="margin-top: 20px;"></questao-view-card>
+                <!-- <todo-card style="margin-top: 20px;"></todo-card> -->
               </div>
             </div>
           </div>
@@ -42,17 +44,20 @@
 </template>
 
 <script>
-import TodoCard from './components/TodoCard'
+import QuestaoViewCard from './components/QuestaoViewCard'
 
 export default {
   name: 'app',
   components: {
-    TodoCard
+    QuestaoViewCard
   },
   data () {
     return {
       msg: 'Hello, World!'
     }
+  },
+  mounted: function () {
+    console.log(this.$http)
   }
 }
 </script>

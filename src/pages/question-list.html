@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>vue-tutorial</title>
+    <link rel="stylesheet" href="../../node_modules/bulma/css/bulma.css" type="text/css">
+    <link rel="stylesheet" href="../../node_modules/font-awesome/css/font-awesome.min.css" type="text/css">
+</head>
+
+<body>
+
+    <!-- app -->
+    <section class="hero is-primary is-bold is-fullheight">
+        <!-- Hero head: will stick at the top -->
+        <div class="hero-head">
+            <nav class="navbar">
+                <div class="container">
+                    <div class="navbar-brand">
+                        <a class="navbar-item">
+                            ProjectX
+                        </a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+
+        <!-- Hero content: will be in the middle -->
+        <div class="hero-body">
+            <div class="container has-text-centered">
+                <div class="row">
+                    <div class="columns">
+                        <div class="column is-half is-offset-one-quarter">
+
+                            <!-- CARD LIST -->
+                            <div class="card">
+                                <header class="card-header">
+                                    <p class="control is-expanded card-header-title has-text-centered">
+                                        Questions
+                                        <!--<input class="input is-primary has-text-centered" type="text"
+                                            placeholder="Nova questão...cabeçalho"> -->
+                                    </p>
+                                    <p class="control">
+                                        <a class="button is-small is-success add-button" style="margin:15px; border-radius: 50%;">
+                                            <span class="icon is-small">
+                                                <i class="fa fa-plus"></i>
+                                            </span>
+                                        </a>
+                                    </p>
+                                    
+                                </header>
+
+                                <!-- Questions -->
+                                <div class="card-content">
+                                    <div class="content">
+                                        <div class="row">
+                                            <div class="columns">
+                                                <div class="column">
+                                                    <div class="field is-grouped" v-for="(questao, index) in questoes">
+                                                        <p class="control">
+                                                            <a class="button is-dark is-small">
+                                                                <span class="icon is-small">
+                                                                    <i class="fas fa-question-circle"></i>
+                                                                </span>
+                                                            </a>
+                                                        </p>
+                                                        <p class="control is-expanded">
+                                                            Questao cabeçalho
+                                                        </p>
+                                                        <p class="control is-expanded">
+                                                            Questao tipo
+                                                        </p>
+                                                        <p class="control">
+                                                            <a class="button is-link is-small"
+                                                                style="border-radius: 50%;">
+                                                                <span class="icon is-small">
+                                                                    <i class="fas fa-eye"></i>
+                                                                </span>
+                                                            </a>
+                                                        </p>
+                                                        <p class="control">
+                                                            <a class="button is-info is-small"
+                                                                style=" border-radius: 50%;">
+                                                                <span class="icon is-small">
+                                                                    <i class="fas fa-pen"></i>
+                                                                </span>
+                                                            </a>
+                                                        </p>
+                                                        <p class="control">
+                                                            <a class="button is-danger is-small"
+                                                                style=" border-radius: 50%;">
+                                                                <span class="icon is-small">
+                                                                    <i class="fa fa-trash"></i>
+                                                                </span>
+                                                            </a>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- questions end -->
+
+                            </div>
+                            <!-- CARD LIST end -->
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Hero footer: will stick at the bottom -->
+        <div class="hero-foot">
+            <div class="container">
+                <div class="content has-text-centered">
+                    <p>
+                        <strong>ProjectX</strong> by <a href="http://github.com/fernandasj">Fernanda Vieira</a>.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- app end -->
+    <script src="/dist/build.js"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+
+</body>
+
+</html>

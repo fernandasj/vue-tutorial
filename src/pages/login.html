@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>vue-tutorial</title>
+    <link rel="stylesheet" href="../../node_modules/bulma/css/bulma.css" type="text/css">
+    <link rel="stylesheet" href="../../node_modules/font-awesome/css/font-awesome.min.css" type="text/css">
+</head>
+
+<body>
+
+    <!-- app -->
+    <section class="hero is-primary is-bold is-fullheight">
+        <!-- Hero head: will stick at the top -->
+        <div class="hero-head">
+            <nav class="navbar">
+                <div class="container">
+                    <div class="navbar-brand">
+                        <a class="navbar-item">
+                            ProjectX
+                        </a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+
+        <!-- Hero content: will be in the middle -->
+        <div class="hero-body">
+            <div class="container has-text-centered">
+                <div class="row">
+                    <div class="columns">
+                        <div class="column is-half is-offset-one-quarter">
+
+                            <!-- CARD LOGIN -->
+                            <div class="card">
+                                <header class="card-header">
+                                    <p class="control is-expanded card-header-title has-text-centered">
+                                        Login
+                                        <!--<input class="input is-primary has-text-centered" type="text"
+                                            placeholder="Nova questão...cabeçalho"> -->
+                                    </p>
+                                </header>
+
+                                <!-- CARD INPUTS -->
+                                <div class="card-content">
+                                    <div class="content">
+                                        <div class="field">
+                                            <p class="control has-icons-left has-icons-right">
+                                                <input class="input" type="email" placeholder="Email">
+                                                <span class="icon is-small is-left">
+                                                    <i class="fas fa-envelope"></i>
+                                                </span>
+                                            </p>
+                                        </div>
+                                        <div class="field">
+                                            <p class="control has-icons-left">
+                                                <input class="input" type="password" placeholder="Password">
+                                                <span class="icon is-small is-left">
+                                                    <i class="fas fa-lock"></i>
+                                                </span>
+                                            </p>
+                                        </div>
+                                        <div class="field">
+                                            <p class="control">
+                                                <button class="button is-success">
+                                                    Login
+                                                </button>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- CARD INPUTS end -->
+
+                            </div>
+                            <!-- CARD LOGIN end -->
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Hero footer: will stick at the bottom -->
+        <div class="hero-foot">
+            <div class="container">
+                <div class="content has-text-centered">
+                    <p>
+                        <strong>ProjectX</strong> by <a href="http://github.com/fernandasj">Fernanda Vieira</a>.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- app end -->
+    <script src="/dist/build.js"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+
+</body>
+
+</html>

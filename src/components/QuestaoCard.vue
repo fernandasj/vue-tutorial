@@ -1,42 +1,65 @@
 <template>
-  <div class="row">
-    <div class="columns">
-      <div class="column  is-half is-offset-one-quarter">
+  <div class="modal">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Adicionar Questão</p>
+        <button class="delete" aria-label="close"></button>
+      </header>
+      <section class="modal-card-body">
         <div class="field is-grouped">
-          <p class="control is-expanded">
-              <textarea class="textarea is-primary" rows="3" placeholder="Primary textarea"></textarea>
-             <!-- <input class="input is-primary has-text-centered" type="text" placeholder="Nova questão..." v-model="questao"> -->
+          <p class="control field is-expanded has-text-left">
+            <label class="label">Cabeçalho da Questão</label>
+            <textarea
+              class="textarea is-primary"
+              rows="3"
+              placeholder="Cabeçalho da questão"
+              v-model="questao"
+            ></textarea>
           </p>
-          <!-- <p class="control">
-            <a class="button is-success add-button" @click="enviarQuestao">
-              <span class="icon is-small">
-                <i class="fa fa-plus"></i>
-              </span>
-            </a>
-          </p> -->
+          <div class="has-text-right">
+            <label class="label">Tipo da Questão</label>
+            <div class="select field is-primary">
+              <select>
+                <option>Tipo</option>
+                <option>Objetiva</option>
+                <option>Subjetiva</option>
+                <option>Algoritmo</option>
+              </select>
+            </div>
+          </div>
         </div>
-      </div>
+        <!--corpo da qestao-->
+        <!-- <questao-objetiva></questao-objetiva> -->
+        <questao-subjetiva></questao-subjetiva>
+      </section>
+      <footer class="modal-card-foot">
+        <button class="button is-success">Savar</button>
+        <button class="button">Cancelar</button>
+      </footer>
     </div>
   </div>
 </template>
 
 <script>
+import QuestaoObjetiva from "./QuestaoObjetiva"
+import QuestaoSubjetiva from "./QuestaoSubjetiva"
+
 export default {
-  name: 'questao-card',
-  data () {
+  name: "questao-card",
+  components: {
+    QuestaoObjetiva,
+    QuestaoSubjetiva
+  },
+  data() {
     return {
-      questao: ''
-    }
+      questao: ""
+    };
   },
   methods: {
-    enviarQuestao(){
-      if(this.questao != ''){
-        this.$emit('novaQuestao', this.questao)
-      }
-      this.questao = ''
-    }
+
   }
-}
+};
 </script>
 
 <style scoped>

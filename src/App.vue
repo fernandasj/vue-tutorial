@@ -7,7 +7,7 @@
           <div class="container">
             <div class="navbar-brand">
               <a class="navbar-item">
-                VueJs Tutorial 1.0
+                ProjectX
               </a>
             </div>
           </div>
@@ -21,8 +21,6 @@
             <div class="columns">
               <div class="column is-half is-offset-one-quarter">
                 <questao-view-card></questao-view-card>
-                <questao-view-card style="margin-top: 20px;"></questao-view-card>
-                <!-- <todo-card style="margin-top: 20px;"></todo-card> -->
               </div>
             </div>
           </div>
@@ -34,7 +32,7 @@
         <div class="container">
           <div class="content has-text-centered">
             <p>
-              <strong>VueJS Tutorial</strong> by <a href="http://github.com/kessiacastro">Késsia Castro</a>.
+              <strong>ProjectX</strong> by <a href="http://github.com/fernandasj">Fernanda Vieira</a>.
             </p>
           </div>
         </div>
@@ -52,9 +50,7 @@ export default {
     QuestaoViewCard
   },
   data () {
-    return {
-      msg: 'Hello, World!'
-    }
+
   },
   mounted: function () {
     console.log(this.$http)

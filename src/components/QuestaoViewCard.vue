@@ -21,7 +21,7 @@
         <div class="row">
           <div class="columns">
             <div class="column">
-              <div class="field is-grouped" v-for="(questao, index) in questoes">
+              <div class="field is-grouped" v-for="questao in questoes">
                 <p class="control">
                   <a class="button is-dark is-small">
                     <span class="icon is-small">
@@ -29,10 +29,10 @@
                     </span>
                   </a>
                 </p>
-                <p class="control is-expanded">Questao cabeçalho</p>
-                <p class="control is-expanded">Questao tipo</p>
+                <p class="control is-expanded">{{ questao.headQuestion }}</p>
+                <p class="control is-expanded">{{ questao.type }}</p>
                 <p class="control">
-                  <a class="button is-link is-small" style="border-radius: 50%;">
+                  <a class="button is-link is-small" style="border-radius: 50%;" v-on:click='oi(questao.idQuestion)'>
                     <span class="icon is-small">
                       <i class="fas fa-eye"></i>
                     </span>
@@ -46,7 +46,7 @@
                   </a>
                 </p>
                 <p class="control">
-                  <a class="button is-danger is-small" style=" border-radius: 50%;">
+                  <a class="button is-danger is-small" style=" border-radius: 50%;" v-on:click='deleteQuestion(questao.idQuestion)'>
                     <span class="icon is-small">
                       <i class="fa fa-trash"></i>
                     </span>
@@ -77,16 +77,37 @@ export default {
   },
   data() {
     return {
-      // dias: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
-      // meses: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
-      questoes: []
+      questoes: null
     };
   },
-  computed: {
-
+  mounted() {
+    this.getQuestions()
   },
   methods: {
-
+    oi (id) {
+      alert(id)
+    },
+    getQuestions () {
+      this.$axios
+        .get('http://127.0.0.1:8000/api/questions/')
+        .then(response => {
+          console.log(response)
+          this.questoes = response.data.results
+        })
+        .catch(error => {
+         console.log(error)
+        })
+    },
+    deleteQuestion (id) {
+      this.$axios
+        .delete('http://127.0.0.1:8000/api/questions/' + id)
+        .then(response => {
+          this.getQuestions()
+        })
+        .catch(error => {
+         console.log(error)
+        })
+    }
   }
 };
 </script>

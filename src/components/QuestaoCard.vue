@@ -20,18 +20,19 @@
           <div class="has-text-right">
             <label class="label">Tipo da Questão</label>
             <div class="select field is-primary">
-              <select>
-                <option>Tipo</option>
-                <option>Objetiva</option>
-                <option>Subjetiva</option>
-                <option>Algoritmo</option>
+              <select @change="typeUpdated">
+                <option value="-1">Tipo</option>
+                <option value="0">Objetiva</option>
+                <option value="1">Subjetiva</option>
+                <option value="2">Algoritimo</option>
               </select>
             </div>
           </div>
         </div>
         <!--corpo da qestao-->
-        <!-- <questao-objetiva></questao-objetiva> -->
-        <questao-subjetiva></questao-subjetiva>
+        <questao-objetiva v-show="type === '0'"></questao-objetiva>
+        <questao-subjetiva v-show="type === '1'"></questao-subjetiva>
+        <questao-algoritmo v-show="type === '2'"></questao-algoritmo>
       </section>
       <footer class="modal-card-foot">
         <button class="button is-success">Savar</button>
@@ -44,20 +45,24 @@
 <script>
 import QuestaoObjetiva from "./QuestaoObjetiva"
 import QuestaoSubjetiva from "./QuestaoSubjetiva"
+import QuestaoAlgoritmo from "./QuestaoAlgoritmo"
 
 export default {
   name: "questao-card",
   components: {
     QuestaoObjetiva,
-    QuestaoSubjetiva
+    QuestaoSubjetiva,
+    QuestaoAlgoritmo
   },
   data() {
     return {
-      questao: ""
+      type: "-1"
     };
   },
   methods: {
-
+    typeUpdated (event) {
+      this.type = event.target.value
+    }
   }
 };
 </script>

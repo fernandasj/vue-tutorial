@@ -50,7 +50,8 @@ export default {
     QuestaoViewCard
   },
   data () {
-
+    return {
+    }
   },
   mounted: function () {
     console.log(this.$http)

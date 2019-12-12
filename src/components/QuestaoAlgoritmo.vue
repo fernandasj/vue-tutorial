@@ -10,36 +10,36 @@
     <tr>
       <td>
         <p class="control field is-expanded has-text-left">
-          <input class="input is-primary" placeholder="Ex: 1, 1 2, bla, bla ble" v-model="questao">
+          <input class="input is-primary" placeholder="Ex: 1, 1 2, bla, bla ble" v-model="code">
         </p>
       </td>
       <td>
         <p class="control field is-expanded has-text-left">
-          <input class="input is-primary" placeholder="Ex: 1, 1 2, bla, bla ble" v-model="questao">
-        </p>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <p class="control field is-expanded has-text-left">
-          <input class="input is-primary" placeholder="Ex: 1, 1 2, bla, bla ble" v-model="questao">
-        </p>
-      </td>
-      <td>
-        <p class="control field is-expanded has-text-left">
-          <input class="input is-primary" placeholder="Ex: 1, 1 2, bla, bla ble" v-model="questao">
+          <input class="input is-primary" placeholder="Ex: 1, 1 2, bla, bla ble" v-model="code">
         </p>
       </td>
     </tr>
     <tr>
       <td>
         <p class="control field is-expanded has-text-left">
-          <input class="input is-primary" placeholder="Ex: 1, 1 2, bla, bla ble" v-model="questao">
+          <input class="input is-primary" placeholder="Ex: 1, 1 2, bla, bla ble" v-model="code">
         </p>
       </td>
       <td>
         <p class="control field is-expanded has-text-left">
-          <input class="input is-primary" placeholder="Ex: 1, 1 2, bla, bla ble" v-model="questao">
+          <input class="input is-primary" placeholder="Ex: 1, 1 2, bla, bla ble" v-model="code">
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p class="control field is-expanded has-text-left">
+          <input class="input is-primary" placeholder="Ex: 1, 1 2, bla, bla ble" v-model="code">
+        </p>
+      </td>
+      <td>
+        <p class="control field is-expanded has-text-left">
+          <input class="input is-primary" placeholder="Ex: 1, 1 2, bla, bla ble" v-model="code">
         </p>
       </td>
     </tr>

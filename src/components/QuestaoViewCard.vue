@@ -46,7 +46,7 @@
                   </a>
                 </p>
                 <p class="control">
-                  <a class="button is-danger is-small" style=" border-radius: 50%;" v-on:click='deleteQuestion(questao.idQuestion)'>
+                  <a class="button is-danger is-small" style=" border-radius: 50%;" @click='deleteQuestion(questao.idQuestion)'>
                     <span class="icon is-small">
                       <i class="fa fa-trash"></i>
                     </span>
@@ -102,7 +102,7 @@ export default {
       this.$axios
         .delete('http://127.0.0.1:8000/api/questions/' + id)
         .then(response => {
-          this.getQuestions()
+          this.questoes.splice(id,1)
         })
         .catch(error => {
          console.log(error)

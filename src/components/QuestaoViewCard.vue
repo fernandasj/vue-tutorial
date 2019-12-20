@@ -39,7 +39,7 @@
                   </a>
                 </p>
                 <p class="control">
-                  <a class="button is-info is-small" style=" border-radius: 50%;">
+                  <a class="button is-info is-small" style=" border-radius: 50%;" @click="editQuestion(questao.idQuestion)">
                     <span class="icon is-small">
                       <i class="fas fa-pen"></i>
                     </span>
@@ -77,7 +77,8 @@ export default {
   },
   data() {
     return {
-      questoes: null
+      questoes: null,
+      questaoEdit: null
     };
   },
   mounted() {
@@ -106,6 +107,16 @@ export default {
         })
         .catch(error => {
          console.log(error)
+        })
+    },
+    editQuestion (id) {
+      this.$axios
+        .get('http://127.0.0.1:8000/api/questions/' + id)
+        .then(response => {
+          this.editQuestion = response.data.results
+        })
+        .catch(error => {
+          console.log(error)
         })
     }
   }

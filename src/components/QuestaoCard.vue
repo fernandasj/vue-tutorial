@@ -6,47 +6,58 @@
         <p class="modal-card-title">Adicionar Questão</p>
         <button class="delete" aria-label="close"></button>
       </header>
-      <form @submit="formSubmitQuestion">
-        <section class="modal-card-body">
-          <div class="field is-grouped">
-            <p class="control field is-expanded has-text-left">
-              <label class="label">Cabeçalho da Questão</label>
-              <textarea
-                class="textarea is-primary"
-                rows="3"
-                placeholder="Cabeçalho da questão"
-                v-model="headQuestion"
-              ></textarea>
-            </p>
-            <div class="has-text-right">
+      <section class="modal-card-body">
+        <div class="content">
+          <div class="columns">
+            <div class="column is-one-quarter">
               <label class="label">Tipo da Questão</label>
+            </div>
+            <div class="column is-one-quarter">
+              <div class="field is-primary">
+                <div class="select is-primary">
+                  <select @change="typeUpdated">
+                    <option value="-1">Tipo</option>
+                    <option value="0">Objetiva</option>
+                    <option value="1">Subjetiva</option>
+                    <option value="2">Algoritimo</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="column is-one-fifth">
+              <label class="label has-text-left">Disciplina</label>
+            </div>
+            <div class="column">
               <div class="select field is-primary">
-                <select @change="typeUpdated" v-model="typeQuestion">
-                  <option value="-1">Tipo</option>
-                  <option value="0">Objetiva</option>
-                  <option value="1">Subjetiva</option>
-                  <option value="2">Algoritimo</option>
+                <select v-model="discipline">
+                  <option v-for="disc in disciplines" value="disc.idDiscipline">{{ disc.name }}</option>
                 </select>
               </div>
-              <label class="label">Tipo da Questão</label>
-              <div class="select field is-primary">
-                <select v-for="disc in disciplines">
-                    <option>{{ disc.name }}</option>
-                    <input v-model="discipline" type="hidden" v-bind-value="disc.idDiscipline">{{ disc.idDiscipline }}
-                </select>
+            </div>
+          </div>
+          <div class="columns">
+            <div class="column">
+              <div class="field">
+                  <label class="label has-text-left">Cabeçalho da Questão</label>
+                  <textarea
+                    class="textarea is-primary"
+                    rows="3"
+                    placeholder="Cabeçalho da questão"
+                    v-model="headQuestion"
+                  ></textarea>
               </div>
             </div>
           </div>
           <!--corpo da qestao-->
           <questao-objetiva v-show="type === '0'"></questao-objetiva>
           <questao-subjetiva v-show="type === '1'"></questao-subjetiva>
-          <questao-algoritmo v-show="type === '2'"></questao-algoritmo>
-        </section>
-        <footer class="modal-card-foot">
-          <button type="submit" class="button is-success">Savar</button>
-          <button class="button">Cancelar</button>
-        </footer>
-      </form>
+          <questao-algoritmo ref="qstAlg" v-show="type === '2'" :input="input" :output="output"></questao-algoritmo>
+        </div>
+      </section>
+      <footer class="modal-card-foot">
+        <button type="submit" class="button is-success" @click="formSubmitQuestion">Savar</button>
+        <button class="button">Cancelar</button>
+      </footer>
     </div>
   </div>
 </template>
@@ -66,9 +77,11 @@ export default {
   data() {
     return {
       type: "-1",
-      headQuestion: " ",
-      discipline: " ",
-      disciplines: null
+      headQuestion: "",
+      discipline: "",
+      disciplines: null,
+      input: 10,
+      output: 14,
     };
   },
   mounted() {
@@ -77,6 +90,10 @@ export default {
   methods: {
     typeUpdated(event) {
       this.type = event.target.value;
+    },
+    inputTyped(e) {
+      this.input = e
+      console.log('Card: ' + this.input)
     },
     getDisciplines () {
       this.$axios
@@ -91,20 +108,22 @@ export default {
     },
     formSubmitQuestion(e) {
       e.preventDefault();
+      let codes = this.$refs.qstAlg.getData();
+      console.log(codes[0]['input'])
       let currentObj = this;
-      if (this.type === '1') {
-        this.$axios.post('http://localhost:8000/api/questions/', {
-            headQuestion: this.headQuestion,
-            typeQuestion: this.type,
-            discipline: this.discipline
-        })
-        .then(function (response) {
-            currentObj.output = response.data;
-        })
-        .catch(function (error) {
-            currentObj.output = error;
-        });
-      }
+      this.$axios.post('http://localhost:8000/api/questions/', {
+          headQuestion: this.headQuestion,
+          typeQuestion: this.type,
+          discipline: this.discipline,
+          input: codes[0]['input'],
+          output: codes[0]['output'],
+      })
+      .then(response => {
+          console.log(response)
+      })
+      .catch(function (error) {
+          console.log(error)
+      });
     }
   }
 };

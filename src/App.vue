@@ -20,7 +20,7 @@
           <div class="row">
             <div class="columns">
               <div class="column is-half is-offset-one-quarter">
-                <questao-view-card></questao-view-card>
+                <router-view></router-view>
               </div>
             </div>
           </div>
@@ -42,13 +42,8 @@
 </template>
 
 <script>
-import QuestaoViewCard from './components/QuestaoViewCard'
-
 export default {
   name: 'app',
-  components: {
-    QuestaoViewCard
-  },
   data () {
     return {
     }

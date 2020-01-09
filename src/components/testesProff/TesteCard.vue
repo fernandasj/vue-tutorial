@@ -9,23 +9,17 @@
       <section class="modal-card-body">
         <div class="content">
           <div class="columns">
-            <div class="column is-one-quarter">
+            <div class="column is-two-fifths">
               <div class="field is-primary">
                 <label class="label has-text-left">Data Inicial</label>
               </div>
-              <div class="column">
-                <input class="input field is-primary" type="datetime-local" placeholder="data" />
-              </div>
+              <input class="input field is-primary" type="datetime-local" placeholder="data" />
             </div>
-          </div>
-          <div class="columns">
-            <div class="column">
+            <div class="column is-two-fifths">
               <div class="field is-primary">
                 <label class="label has-text-left">Data Limite</label>
               </div>
-              <div class="column">
-                <input class="input field is-primary" type="datetime-local" placeholder="data" />
-              </div>
+              <input class="input field is-primary" type="datetime-local" placeholder="data" />
             </div>
           </div>
           <div class="columns">
@@ -34,8 +28,8 @@
                 <label class="label has-text-left">Disciplina</label>
               </div>
             </div>
-            <div class="column">
-              <div class="select field is-primary">
+            <div class="column is-one-quarter">
+              <div class="select is-primary">
                 <select v-model="discipline">
                   <option v-for="disc in disciplines" value="disc.idDiscipline">{{ disc.name }}</option>
                 </select>
@@ -54,6 +48,25 @@
                 ></textarea>
               </div>
             </div>
+          </div>
+          <div class="columns">
+            <div class="column">
+              <div class="field">
+                <label class="label has-text-right" style="margin-top:5px">Adicionar Questões</label>
+              </div>
+            </div>
+            <p class="control">
+              <a
+                class="button is-small is-success add-button"
+                id="showModal"
+                style="margin:15px; border-radius: 50%;"
+              >
+                <span class="icon is-small">
+                  <i class="fa fa-plus"></i>
+                </span>
+              </a>
+            </p>
+
           </div>
         </div>
       </section>

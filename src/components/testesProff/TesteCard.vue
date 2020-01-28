@@ -52,12 +52,11 @@
           <div class="columns">
             <div class="column">
               <div class="field">
-                <label class="label has-text-right" style="margin-top:5px">Adicionar Questões</label>
+                <label class="label has-text-left" style="margin-top:5px">Adicionar Questões</label>
               </div>
-            </div>
-            <p class="control">
+              <!-- <p class="control">
               <a
-                class="button is-small is-success add-button"
+                class=" showModal button is-small is-success add-button"
                 id="showModal"
                 style="margin:15px; border-radius: 50%;"
               >
@@ -65,8 +64,68 @@
                   <i class="fa fa-plus"></i>
                 </span>
               </a>
-            </p>
-
+              </p>-->
+            </div>
+          </div>
+          <div class="columns">
+            <div class="column">
+              <div class="field is-grouped">
+                <p class="control is-expanded"><b>Cabeçalho</b></p>
+                <p class="control is-expanded"><b>Tipo</b></p>
+              </div>
+            </div>
+          </div>
+          <div class="columns">
+            <div class="column">
+              <div class="field is-grouped" v-for="questao in questoes">
+                <!-- <p class="control">
+                  <a class="button is-dark is-small">
+                    <span class="icon is-small">
+                      <i class="fas fa-question-circle"></i>
+                    </span>
+                  </a>
+                </p>-->
+                <input class="checkbox" type="checkbox" />
+                <p
+                  class="control is-expanded"
+                  style="margin-left:20px;"
+                >{{ questao.headQuestion }}</p>
+                <p class="control is-expanded">{{ questao.type }}</p>
+                <!-- <p class="control">
+                  <a
+                    class="button is-link is-small"
+                    style="border-radius: 50%;"
+                    v-on:click="oi(questao.idQuestion)"
+                  >
+                    <span class="icon is-small">
+                      <i class="fas fa-eye"></i>
+                    </span>
+                  </a>
+                </p>
+                <p class="control">
+                  <a
+                    class="button is-info is-small"
+                    style=" border-radius: 50%;"
+                    @click="editQuestion(questao.idQuestion)"
+                  >
+                    <span class="icon is-small">
+                      <i class="fas fa-pen"></i>
+                    </span>
+                  </a>
+                </p>
+                <p class="control">
+                  <a
+                    class="button is-danger is-small"
+                    style=" border-radius: 50%;"
+                    @click="deleteQuestion(questao.idQuestion)"
+                  >
+                    <span class="icon is-small">
+                      <i class="fa fa-trash"></i>
+                    </span>
+                  </a>
+                </p> -->
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -79,28 +138,37 @@
 </template>
 
 <script>
+import QuestaoViewCard from "../questoes/QuestaoViewCard";
+
 export default {
   name: "teste-card",
+  components: {
+    QuestaoViewCard
+  },
   data() {
     return {
-      type: "-1",
-      headQuestion: "",
       discipline: "",
+      headQuestion: "",
       disciplines: null,
-      input: 10,
-      output: 14
+      questoes: null,
+      questaoEdit: null
     };
   },
   mounted() {
     this.getDisciplines();
+    this.getQuestions();
   },
   methods: {
-    typeUpdated(event) {
-      this.type = event.target.value;
-    },
-    inputTyped(e) {
-      this.input = e;
-      console.log("Card: " + this.input);
+    getQuestions() {
+      this.$axios
+        .get("http://127.0.0.1:8000/api/questions/")
+        .then(response => {
+          console.log(response);
+          this.questoes = response.data.results;
+        })
+        .catch(error => {
+          console.log(error);
+        });
     },
     getDisciplines() {
       this.$axios
@@ -114,24 +182,24 @@ export default {
         });
     },
     formSubmitQuestion(e) {
-      e.preventDefault();
-      let codes = this.$refs.qstAlg.getData();
-      console.log(codes[0]["input"]);
-      let currentObj = this;
-      this.$axios
-        .post("http://localhost:8000/api/questions/", {
-          headQuestion: this.headQuestion,
-          typeQuestion: this.type,
-          discipline: this.discipline,
-          input: codes[0]["input"],
-          output: codes[0]["output"]
-        })
-        .then(response => {
-          console.log(response);
-        })
-        .catch(function(error) {
-          console.log(error);
-        });
+      // e.preventDefault();
+      // let codes = this.$refs.qstAlg.getData();
+      // console.log(codes[0]["input"]);
+      // let currentObj = this;
+      // this.$axios
+      //   .post("http://localhost:8000/api/questions/", {
+      //     headQuestion: this.headQuestion,
+      //     typeQuestion: this.type,
+      //     discipline: this.discipline,
+      //     input: codes[0]["input"],
+      //     output: codes[0]["output"]
+      //   })
+      //   .then(response => {
+      //     console.log(response);
+      //   })
+      //   .catch(function(error) {
+      //     console.log(error);
+      //   });
     }
   }
 };
@@ -152,5 +220,36 @@ export default {
 }
 .add-button {
   border-radius: 50%;
+}
+input[type="checkbox"] {
+  position: relative;
+  cursor: pointer;
+  margin-top: 4px;
+}
+input[type="checkbox"]:before {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  top: 0;
+  left: 0;
+  border: 2px solid #555555;
+  border-radius: 3px;
+  background-color: white;
+}
+input[type="checkbox"]:checked:after {
+  content: "";
+  display: block;
+  width: 6px;
+  height: 10px;
+  border: solid black;
+  border-width: 0 2px 2px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+  position: absolute;
+  top: 2px;
+  left: 6px;
 }
 </style>

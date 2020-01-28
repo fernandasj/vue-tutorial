@@ -5,7 +5,7 @@
       <p class="control">
         <a
           class="button is-small is-success add-button"
-          id="showModal"
+          id="showModalTeste"
           style="margin:15px; border-radius: 50%;"
         >
           <span class="icon is-small">
@@ -72,7 +72,7 @@
 import TesteCard from "./TesteCard"
 
 export default {
-  name: "questao-view-card",
+  name: "teste-professor-card-view",
   components: {
     TesteCard
   },

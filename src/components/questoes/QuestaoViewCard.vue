@@ -4,8 +4,8 @@
       <p class="control is-expanded card-header-title has-text-centered">Questões</p>
       <p class="control">
         <a
-          class="button is-small is-success add-button"
-          id="showModal"
+          class="button is-small is-black add-button"
+          @click="show"
           style="margin:15px; border-radius: 50%;"
         >
           <span class="icon is-small">
@@ -59,7 +59,7 @@
       </div>
     </div>
     <div>
-    <questao-card></questao-card>
+    <questao-card v-bind:class="(showModal) ? 'is-active' : ''" @hide="hideClicked"></questao-card>
   </div>
     <!-- questions end -->
   </div>
@@ -78,7 +78,8 @@ export default {
   data() {
     return {
       questoes: null,
-      questaoEdit: null
+      questaoEdit: null,
+      showModal: false
     };
   },
   mounted() {
@@ -87,6 +88,12 @@ export default {
   methods: {
     oi (id) {
       alert(id)
+    },
+    show() {
+      this.showModal = true
+    },
+    hideClicked() {
+      this.showModal = false
     },
     getQuestions () {
       this.$axios

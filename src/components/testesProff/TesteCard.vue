@@ -13,13 +13,13 @@
               <div class="field is-primary">
                 <label class="label has-text-left">Data Inicial</label>
               </div>
-              <input class="input field is-primary" type="datetime-local" placeholder="data" />
+              <input v-model="aplicationDate" class="input field is-primary" type="datetime-local" placeholder="data" />
             </div>
             <div class="column is-two-fifths">
               <div class="field is-primary">
                 <label class="label has-text-left">Data Limite</label>
               </div>
-              <input class="input field is-primary" type="datetime-local" placeholder="data" />
+              <input v-model="aplicationDateLimit" class="input field is-primary" type="datetime-local" placeholder="data" />
             </div>
           </div>
           <div class="columns">
@@ -31,7 +31,7 @@
             <div class="column is-one-quarter">
               <div class="select is-primary">
                 <select v-model="discipline">
-                  <option v-for="disc in disciplines" value="disc.idDiscipline">{{ disc.name }}</option>
+                  <option v-for="disc in disciplines" :value="disc.idDiscipline">{{ disc.name }}</option>
                 </select>
               </div>
             </div>
@@ -44,7 +44,7 @@
                   class="textarea is-primary"
                   rows="3"
                   placeholder="Cabeçalho da questão"
-                  v-model="headQuestion"
+                  v-model="name"
                 ></textarea>
               </div>
             </div>
@@ -54,84 +54,45 @@
               <div class="field">
                 <label class="label has-text-left" style="margin-top:5px">Adicionar Questões</label>
               </div>
-              <!-- <p class="control">
-              <a
-                class=" showModal button is-small is-success add-button"
-                id="showModal"
-                style="margin:15px; border-radius: 50%;"
-              >
-                <span class="icon is-small">
-                  <i class="fa fa-plus"></i>
-                </span>
-              </a>
-              </p>-->
             </div>
           </div>
-          <div class="columns">
-            <div class="column">
-              <div class="field is-grouped">
-                <p class="control is-expanded"><b>Cabeçalho</b></p>
-                <p class="control is-expanded"><b>Tipo</b></p>
-              </div>
+          <div class="field has-addons">
+            <div class="control">
+              <input id="autocomplete" class="input is-primary" v-model="idQuestion" list="questoes" placeholder="Procure uma questão" />
+            </div>
+            <div class="field">
+            <datalist id="questoes">
+              <option v-for="(questao, index) in questoes" :value="index" :label="questao.headQuestion"></option>
+            </datalist>
+          </div>
+            <div class="control">
+              <button type="submit" class="button is-black" @click="addQuestions">
+                <b>+</b>
+              </button>
             </div>
           </div>
-          <div class="columns">
-            <div class="column">
-              <div class="field is-grouped" v-for="questao in questoes">
-                <!-- <p class="control">
-                  <a class="button is-dark is-small">
-                    <span class="icon is-small">
-                      <i class="fas fa-question-circle"></i>
-                    </span>
-                  </a>
-                </p>-->
-                <input class="checkbox" type="checkbox" />
-                <p
-                  class="control is-expanded"
-                  style="margin-left:20px;"
-                >{{ questao.headQuestion }}</p>
-                <p class="control is-expanded">{{ questao.type }}</p>
-                <!-- <p class="control">
-                  <a
-                    class="button is-link is-small"
-                    style="border-radius: 50%;"
-                    v-on:click="oi(questao.idQuestion)"
-                  >
-                    <span class="icon is-small">
-                      <i class="fas fa-eye"></i>
-                    </span>
-                  </a>
-                </p>
-                <p class="control">
-                  <a
-                    class="button is-info is-small"
-                    style=" border-radius: 50%;"
-                    @click="editQuestion(questao.idQuestion)"
-                  >
-                    <span class="icon is-small">
-                      <i class="fas fa-pen"></i>
-                    </span>
-                  </a>
-                </p>
-                <p class="control">
-                  <a
-                    class="button is-danger is-small"
-                    style=" border-radius: 50%;"
-                    @click="deleteQuestion(questao.idQuestion)"
-                  >
-                    <span class="icon is-small">
-                      <i class="fa fa-trash"></i>
-                    </span>
-                  </a>
-                </p> -->
-              </div>
+          <div calss="field">
+            <div class="control">
+              <article  v-for="q in addQuestoes" class="message is-small">
+                <div class="message-header">
+                  <p>Questão selecionada:</p>
+                  <button class="delete is-small" aria-label="delete" @click="deleteQuestions(q.idQuestion)"></button>
+                </div>
+                <div class="message-body">
+                  {{q.headQuestion}}
+                </div>
+              </article>
+              <!-- <span v-for="q in addQuestoes" class="tag is-medium is-black" style="margin-right:5px">
+                {{q.headQuestion}}
+                <button class="delete is-small" @click="deleteQuestions(q.idQuestion)"></button>
+              </span> -->
             </div>
           </div>
         </div>
       </section>
       <footer class="modal-card-foot">
-        <button type="submit" class="button is-success" @click="formSubmitQuestion">Savar</button>
-        <button class="button">Cancelar</button>
+        <button type="submit" class="button is-black" @click="formSubmitQuestion">Savar</button>
+        <button class="button is-dark" @click="destroy">Cancelar</button>
       </footer>
     </div>
   </div>
@@ -147,11 +108,17 @@ export default {
   },
   data() {
     return {
+      aplicationDate: "",
+      aplicationDateLimit: "",
+      name: "",
       discipline: "",
       headQuestion: "",
+      idQuestion: "",
+      getQuestao: "",
       disciplines: null,
       questoes: null,
-      questaoEdit: null
+      questaoEdit: null,
+      addQuestoes: [],
     };
   },
   mounted() {
@@ -159,6 +126,10 @@ export default {
     this.getQuestions();
   },
   methods: {
+    destroy() {
+      console.log('eita')
+      this.$emit('hide')
+    },
     getQuestions() {
       this.$axios
         .get("http://127.0.0.1:8000/api/questions/")
@@ -182,25 +153,31 @@ export default {
         });
     },
     formSubmitQuestion(e) {
-      // e.preventDefault();
-      // let codes = this.$refs.qstAlg.getData();
-      // console.log(codes[0]["input"]);
-      // let currentObj = this;
-      // this.$axios
-      //   .post("http://localhost:8000/api/questions/", {
-      //     headQuestion: this.headQuestion,
-      //     typeQuestion: this.type,
-      //     discipline: this.discipline,
-      //     input: codes[0]["input"],
-      //     output: codes[0]["output"]
-      //   })
-      //   .then(response => {
-      //     console.log(response);
-      //   })
-      //   .catch(function(error) {
-      //     console.log(error);
-      //   });
-    }
+      e.preventDefault();
+      let currentObj = this;
+      this.$axios
+        .post("http://localhost:8000/api/tests/", {
+            aplicationDate: this.aplicationDate,
+            aplicationDateLimit: this.aplicationDateLimit,
+            name: this.name,
+            discipline: this.discipline,
+            questions: this.addQuestoes.map(x => x.idQuestion),
+        })
+        .then(response => {
+          console.log(response);
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
+    addQuestions() {
+      console.log(this.questoes[parseInt(this.idQuestion)])
+      this.addQuestoes.push(this.questoes[parseInt(this.idQuestion)])
+      console.log(this.addQuestoes.map(x => x.idQuestion))
+    },
+    deleteQuestions (id) {
+      this.addQuestoes.splice(id,1)
+    },
   }
 };
 </script>

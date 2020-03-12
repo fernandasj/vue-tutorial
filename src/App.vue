@@ -6,9 +6,9 @@
         <nav class="navbar">
           <div class="container">
             <div class="navbar-brand">
-              <a class="navbar-item">
-                ProjectX
-              </a>
+              <router-link to="/" class="navbar-item">ProjectX</router-link>
+              <router-link to="/questions" class="navbar-item">Questões</router-link>
+              <router-link to="/testesP" class="navbar-item">Testes</router-link>
             </div>
           </div>
         </nav>

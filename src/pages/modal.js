@@ -1,4 +1,4 @@
-$("showModal").click(function() {
+$("#showModal").click(function() {
     $(".modal").addClass("is-active");
 });
 

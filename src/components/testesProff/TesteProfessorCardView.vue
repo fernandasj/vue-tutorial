@@ -4,8 +4,8 @@
       <p class="control is-expanded card-header-title has-text-centered">Testes</p>
       <p class="control">
         <a
-          class="button is-small is-success add-button"
-          id="showModalTeste"
+          class="button is-small is-black add-button"
+          @click="show"
           style="margin:15px; border-radius: 50%;"
         >
           <span class="icon is-small">
@@ -60,7 +60,7 @@
       </div>
     </div>
     <div>
-    <teste-card></teste-card>
+    <teste-card v-bind:class="(showModal) ? 'is-active' : ''" @hide="hideClicked"></teste-card>
   </div>
     <!-- questions end -->
   </div>
@@ -79,7 +79,8 @@ export default {
   data() {
     return {
       testes: null,
-      testeEdit: null
+      testeEdit: null,
+      showModal: false
     };
   },
   mounted() {
@@ -88,6 +89,12 @@ export default {
   methods: {
       oi (id) {
       alert(id)
+    },
+    show() {
+      this.showModal = true
+    },
+    hideClicked() {
+      this.showModal = false
     },
     getTestes () {
       this.$axios

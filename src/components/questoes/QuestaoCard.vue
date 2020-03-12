@@ -19,7 +19,7 @@
                     <option value="-1">Tipo</option>
                     <option value="0">Objetiva</option>
                     <option value="1">Subjetiva</option>
-                    <option value="2">Algoritimo</option>
+                    <option value="2">Algoritmo</option>
                   </select>
                 </div>
               </div>
@@ -30,7 +30,7 @@
             <div class="column">
               <div class="select field is-primary">
                 <select v-model="discipline">
-                  <option v-for="disc in disciplines" value="disc.idDiscipline">{{ disc.name }}</option>
+                  <option v-for="disc in disciplines" :value="disc.idDiscipline">{{ disc.name }}</option>
                 </select>
               </div>
             </div>
@@ -55,8 +55,8 @@
         </div>
       </section>
       <footer class="modal-card-foot">
-        <button type="submit" class="button is-success" @click="formSubmitQuestion">Savar</button>
-        <button class="button">Cancelar</button>
+        <button type="submit" class="button is-black" @click="formSubmitQuestion">Savar</button>
+        <button class="button is-dark" @click="destroy">Cancelar</button>
       </footer>
     </div>
   </div>
@@ -78,16 +78,19 @@ export default {
     return {
       type: "-1",
       headQuestion: "",
-      discipline: "",
+      discipline: null,
       disciplines: null,
-      input: 10,
-      output: 14,
+      input: null,
+      output: null,
     };
   },
   mounted() {
     this.getDisciplines()
   },
   methods: {
+    destroy() {
+      this.$emit('hide')
+    },
     typeUpdated(event) {
       this.type = event.target.value;
     },

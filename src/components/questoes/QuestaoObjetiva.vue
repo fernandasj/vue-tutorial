@@ -2,34 +2,34 @@
   <div class="field ">
       <p class="control field is-expanded has-text-left">
         <label class="label">Alternativa 1</label>
-        <input class="input is-primary" placeholder="Alternativa 1">
+        <input v-model="choice1" class="input is-primary" placeholder="Alternativa 1">
       </p>
       <p class="control field is-expanded has-text-left">
         <label class="label">Alternativa 2</label>
-        <input class="input is-primary" placeholder="Alternativa 2">
+        <input v-model="choice2" class="input is-primary" placeholder="Alternativa 2">
       </p>
       <p class="control field is-expanded has-text-left">
         <label class="label">Alternativa 3</label>
-        <input class="input is-primary" placeholder="Alternativa 3">
+        <input v-model="choice3" class="input is-primary" placeholder="Alternativa 3">
       </p>
       <p class="control field is-expanded has-text-left">
         <label class="label">Alternativa 4</label>
-        <input class="input is-primary" placeholder="Alternativa 4">
+        <input v-model="choice4" class="input is-primary" placeholder="Alternativa 4">
       </p>
       <p class="control field is-expanded has-text-left">
         <label class="label">Alternativa 5</label>
-        <input class="input is-primary" placeholder="Alternativa 5">
+        <input v-model="choice5" class="input is-primary" placeholder="Alternativa 5">
       </p>
 
       <div class="control has-text-left">
         <label class="label">Resposta esperada</label>
         <div class="select field is-primary">
-          <select>
-            <option>Alternativa 1</option>
-            <option>Alternativa 2</option>
-            <option>Alternativa 2</option>
-            <option>Alternativa 4</option>
-            <option>Alternativa 5</option>
+          <select v-model="correctChoice">
+            <option value="1">Alternativa 1</option>
+            <option value="2">Alternativa 2</option>
+            <option value="3">Alternativa 2</option>
+            <option value="4">Alternativa 4</option>
+            <option value="5">Alternativa 5</option>
           </select>
         </div>
       </div>
@@ -40,10 +40,24 @@
 export default {
   name: "questao-objetiva",
 
-  data: {
-
+  data() {
+    return {
+      choice1: null,
+      choice2: null,
+      choice3: null,
+      choice4: null,
+      choice5: null,
+      correctChoice: null,
+      choices: []
+    };
   },
   methods: {
+    formatList(){
+      // for (var i = 1; i <= 5; i++) {
+      //   if (i == this.correctChoice)
+      //     this.choices.push({textChoice: })
+      // }
+    },
     submitChoices(id) {
       let currentObj = this;
       this.$axios.post('http://localhost:8000/api/choices/', {

@@ -1,9 +1,7 @@
 <template>
   <div class="card">
     <header class="card-header">
-      <p class="control is-expanded card-header-title has-text-centered">
-        Login
-      </p>
+      <p class="control is-expanded card-header-title has-text-centered">Login</p>
     </header>
 
     <!-- CARD INPUTS -->
@@ -26,10 +24,21 @@
           </p>
         </div>
         <div class="field">
-          <p class="control">
-            <button class="button is-success">Login</button>
-          </p>
+          <div class="control">
+            <label class="radio">
+              <input v-model="login" :value="1" type="radio" name="user" />
+              Professor(a)
+            </label>
+            <label class="radio">
+              <input v-model="login" :value="2" type="radio" name="user" />
+              Aluno(a)
+            </label>
+          </div>
         </div>
+        <button class="button is-black">Login</button>
+        <a>
+          <p style="margin-top:5px">Cadastre-se aqui!</p>
+        </a>
       </div>
     </div>
     <!-- CARD INPUTS end -->
@@ -37,6 +46,11 @@
 </template>
 <script>
 export default {
-  name: 'login'
+  name: "login",
+  data (){
+    return {
+      login: null
+    };
+  }
 };
 </script>

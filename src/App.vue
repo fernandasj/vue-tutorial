@@ -46,10 +46,14 @@ export default {
   name: 'app',
   data () {
     return {
+      login: null
     }
   },
   mounted: function () {
     console.log(this.$http)
+  },
+  computed: function() {
+    this.login = this.$children.login
   }
 }
 </script>

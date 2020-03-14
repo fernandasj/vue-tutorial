@@ -74,22 +74,34 @@ export default {
             userLogin: {
                 email: "",
                 password: "",
-                userType: ""
+                userType: "",
+                loggedIn: false
             }
         };
     },
     methods: {
         loginData() {
-            console.log(this.userLogin);
+            this.userLogin.loggedIn = true;
             this.$store.dispatch("loginDataAction", this.userLogin);
-            this.$router.push({ path: "/login-data" });
+            console.log(this.userLogin);
 
-            // if (this.userLogin.userType == 1) {
-            //     this.$router.push({ path: "/testesP" });
-            // } else if (this.userLogin.userType == 2) {
-            //     console.log("é um aluno(a)");
-            //     this.$router.push({ path: "/testes" });
-            // }
+            if (this.userLogin.userType == 1) {
+                this.$router.push({ path: "/testesP" });
+            } else if (this.userLogin.userType == 2) {
+                console.log("é um aluno(a)");
+                this.$router.push({ path: "/tests" });
+            }
+        }
+    },
+    created: {
+        function() {
+            const userLogin = {
+                email: null,
+                password: null,
+                userType: null,
+                loggedIn: false
+            };
+            this.$store.dispatch("loginDataAction", userLogin);
         }
     }
 };

@@ -16,14 +16,37 @@ import LoginData from "../components/LoginData";
 export const router = new VueRouter({
   mode: "history",
   routes: [
-    { path: "/", component: Login },
-    { path: "/questions", component: QuestaoViewCard },
-    { path: "/tests", component: TesteEstudanteCardView },
-    { path: "/testesP", component: TesteProfessorCardView },
-    { path: "/resposta-algoritmo", component: RespostaAlgoritmo },
-    { path: "/resposta-subjetiva", component: RespostaSubjetiva },
-    { path: "/resposta-objetiva", component: RespostaObjetiva },
-    { path: "/resultado", component: Resultado },
-    { path: "/login-data", component: LoginData }
+    {
+      path: "/",
+      component: Login
+    },
+    {
+      path: "/questions",
+      component: QuestaoViewCard
+    },
+    {
+      path: "/tests",
+      component: TesteEstudanteCardView
+    },
+    {
+      path: "/testesP",
+      component: TesteProfessorCardView
+    },
+    {
+      path: "/resposta-algoritmo",
+      component: RespostaAlgoritmo
+    },
+    {
+      path: "/resposta-subjetiva",
+      component: RespostaSubjetiva
+    },
+    {
+      path: "/resposta-objetiva",
+      component: RespostaObjetiva
+    },
+    {
+      path: "/resultado",
+      component: Resultado
+    }
   ]
 });

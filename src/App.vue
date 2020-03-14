@@ -6,9 +6,42 @@
                 <nav class="navbar">
                     <div class="container">
                         <div class="navbar-brand">
-                            <router-link to="/" class="navbar-item">ProjectX</router-link>
-                            <router-link to="/questions" class="navbar-item">Questões</router-link>
-                            <router-link to="/testesP" class="navbar-item">Testes</router-link>
+                            <div>
+                                <router-link to="/" class="navbar-item">ProjectX</router-link>
+                            </div>
+
+                            <div>
+                                <router-link
+                                    v-if="getLogin.loggedIn && getLogin.userType == 1"
+                                    to="/questions"
+                                    class="navbar-item"
+                                >Questões</router-link>
+                            </div>
+
+                            <div>
+                                <router-link
+                                    v-if="getLogin.loggedIn && getLogin.userType == 1"
+                                    to="/testesP"
+                                    class="navbar-item"
+                                >Testes</router-link>
+                            </div>
+
+                            <div>
+                                <router-link
+                                    v-if="getLogin.loggedIn && getLogin.userType == 2"
+                                    to="/tests"
+                                    class="navbar-item"
+                                >Testes</router-link>
+                            </div>
+
+                            <div>
+                                <router-link
+                                    v-if="getLogin.loggedIn"
+                                    to="/"
+                                    @click.native="logout"
+                                    class="navbar-item"
+                                >Logout</router-link>
+                            </div>
                         </div>
                     </div>
                 </nav>
@@ -43,13 +76,24 @@
 </template>
 
 <script>
-import Vue from "vue";
-import Vuex from "vuex";
-Vue.use(Vuex);
-export const store = new Vuex.Store();
-
 export default {
-    name: "app"
+    name: "app",
+    methods: {
+        logout() {
+            const userLogin = {
+                email: null,
+                password: null,
+                userType: null,
+                loggedIn: false
+            };
+            this.$store.dispatch("loginDataAction", userLogin);
+        }
+    },
+    computed: {
+        getLogin() {
+            return this.$store.getters.getLoginData;
+        }
+    }
 };
 </script>
 

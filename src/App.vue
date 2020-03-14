@@ -49,22 +49,7 @@ Vue.use(Vuex);
 export const store = new Vuex.Store();
 
 export default {
-    name: "app",
-    data() {
-        return {
-            login: null
-        };
-    },
-    methods: {
-        login() {
-            this.$store.dispatch("login", this.login);
-        }
-    },
-    computed: {
-        getLogin() {
-            return this.$store.getters.login;
-        }
-    }
+    name: "app"
 };
 </script>
 

@@ -155,7 +155,8 @@ export default {
                     typeQuestion: this.type,
                     discipline: this.discipline,
                     input: codes[0]["input"],
-                    output: codes[0]["output"]
+                    output: codes[0]["output"],
+                    choices: this.choices
                 })
                 .then(response => {
                     console.log(response);

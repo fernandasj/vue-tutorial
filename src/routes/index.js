@@ -11,7 +11,7 @@ import RespostaAlgoritmo from "../components/respostas/RespostaAlgoritmo";
 import RespostaSubjetiva from "../components/respostas/RespostaSubjetiva";
 import RespostaObjetiva from "../components/respostas/RespostaObjetiva";
 import Resultado from "../components/testes/Resultado";
-import LoginData from "../components/LoginData";
+import LoginData from "../components/login/LoginData";
 
 export const router = new VueRouter({
   mode: "history",

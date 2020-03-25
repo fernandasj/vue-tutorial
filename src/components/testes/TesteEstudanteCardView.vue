@@ -19,9 +19,8 @@
                     </span>
                   </a>
                 </p>
-                <p class="control is-expanded">{{ testStudents.test }}</p>
-                <p class="control is-expanded">{{ testStudents.scores }}</p>
-                <p class="control is-expanded">{{ testStudents.test.discipline }}</p>
+                <p class="control is-expanded">{{ testStudents.name }}</p>
+                <p class="control is-expanded">{{ testStudents.discipline }}</p>
                 <p class="control" v-if="testStudents.timeFinish != null">
                   <button class="button is-small is-success">
                     <span class="icon is-small">
@@ -54,7 +53,7 @@ export default {
   methods: {
     getTests () {
       this.$axios
-        .get('http://127.0.0.1:8000/api/testStudents/')
+        .get('http://127.0.0.1:8000/api/tests/')
         .then(response => {
           console.log(response)
           this.tests = response.data.results

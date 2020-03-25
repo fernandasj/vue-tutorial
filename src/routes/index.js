@@ -11,6 +11,7 @@ import RespostaAlgoritmo from "../components/respostas/RespostaAlgoritmo";
 import RespostaSubjetiva from "../components/respostas/RespostaSubjetiva";
 import RespostaObjetiva from "../components/respostas/RespostaObjetiva";
 import Resultado from "../components/testes/Resultado";
+import Questionario from "../components/respostas/RespostaBox";
 import LoginData from "../components/login/LoginData";
 
 export const router = new VueRouter({
@@ -47,6 +48,10 @@ export const router = new VueRouter({
     {
       path: "/resultado",
       component: Resultado
+    },
+    {
+      path: "/questionario",
+      component: Questionario
     }
   ]
 });

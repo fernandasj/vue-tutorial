@@ -30,7 +30,7 @@
                   </a>
                 </p>
                 <p class="control is-expanded">{{ questao.headQuestion }}</p>
-                <p class="control is-expanded">{{ questao.type }}</p>
+                <p class="control is-expanded">{{ questao.get_typeQuestion_display }}</p>
                 <p class="control">
                   <a class="button is-link is-small" style="border-radius: 50%;" v-on:click='oi(questao.idQuestion)'>
                     <span class="icon is-small">

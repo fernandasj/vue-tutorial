@@ -1,16 +1,15 @@
 <template>
-    <form-wizard>
-        <tab-content
-            v-for="question in questions"
-            :key="question.idCodeAnswer"
-            title="Personal details"
-        >
-            <div v-if="question.type == 'Algoritmo'">
-                <RespostaAlgoritmo :question_data="question"></RespostaAlgoritmo>
-            </div>
-            <div v-else-if="question.type == 'Objetiva'"></div>
-            <div v-else-if="question.type == 'Subjetiva'"></div>
-        </tab-content>
+    <form-wizard title subtitle>
+        <div v-for="question in questions" :key="question.idQuestion">
+            <tab-content :title="question.headQuestion">
+                <div v-if="question.typeQuestion == 2">
+                    questão algoritmo
+                    <!-- <RespostaAlgoritmo v-bind:questionData="question"></RespostaAlgoritmo> -->
+                </div>
+                <div v-else-if="question.typeQuestion == 0">questão objetiva</div>
+                <div v-else-if="question.typeQuestion == 1">questão subjetiva</div>
+            </tab-content>
+        </div>
     </form-wizard>
 </template>
 <script>
@@ -33,21 +32,36 @@ export default {
         return {
             questions: [
                 {
-                    idCodeAnswer: "fada0715-123b-4753-954f-182e4fe1881f",
-                    question: {
-                        idQuestion: "e112a58a-25f1-46ca-8d48-d29b42cc5897",
-                        headQuestion: "olha lá",
-                        type: "Algoritmo",
-                        discipline: "991eadd2-ea2a-4fe1-a598-36598e945408"
-                    },
-                    inputCode: "3 2",
-                    outputCode: "5"
+                    idQuestion: "a1ee0891-29c2-44ec-91ec-d5f122246013",
+                    headQuestion: "Subtraia dois números",
+                    typeQuestion: 2,
+                    get_typeQuestion_display: "Algoritmo",
+                    discipline: "991eadd2-ea2a-4fe1-a598-36598e945408"
+                },
+                {
+                    idQuestion: "5aa81d18-f7ef-4500-b2ee-19c8478ab7fd",
+                    headQuestion: "Defina o que é um algoritmo",
+                    typeQuestion: 1,
+                    get_typeQuestion_display: "Subjetiva",
+                    discipline: "991eadd2-ea2a-4fe1-a598-36598e945408"
+                },
+                {
+                    idQuestion: "8d09997e-fd49-4e54-9e87-911aa552a2a3",
+                    headQuestion:
+                        "Assinale a alternativa que diz respeito a um desvio condicional:",
+                    typeQuestion: 0,
+                    get_typeQuestion_display: "Objetiva",
+                    discipline: "991eadd2-ea2a-4fe1-a598-36598e945408"
+                },
+                {
+                    idQuestion: "51c72cad-89b4-485a-b9ce-1cc950c9db6d",
+                    headQuestion: "Some dois números inteiros",
+                    typeQuestion: 2,
+                    get_typeQuestion_display: "Algoritmo",
+                    discipline: "991eadd2-ea2a-4fe1-a598-36598e945408"
                 }
             ]
         };
-    },
-    created() {
-        this.$emit("created");
     }
 };
 </script>

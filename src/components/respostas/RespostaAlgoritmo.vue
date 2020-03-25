@@ -13,7 +13,7 @@
                     <div class="columns">
                         <div class="column">
                             <div class="field">
-                                <label class="label has-text-left">{{question.headQuestion }}</label>
+                                <!-- <label class="label has-text-left">{{question.headQuestion }}</label> -->
                             </div>
                             <div class="colunm">
                                 <table
@@ -32,8 +32,8 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>{{question.input}}</td>
-                                            <td>{{question.output}}</td>
+                                            <!-- <td>{{question.input}}</td>
+                                            <td>{{question.output}}</td>-->
                                         </tr>
                                     </tbody>
                                 </table>
@@ -42,12 +42,12 @@
                                 <div class="field">
                                     <label class="label has-text-left">Resposta:</label>
                                 </div>
-                                <textarea
+                                <!-- <textarea
                                     class="textarea is-primary"
                                     rows="10"
                                     placeholder="Digite aqui o seu algoritmo resposta..."
-                                    v-model="answertQuestion"
-                                ></textarea>
+                                    v-model="answerQuestion"
+                                ></textarea>-->
                             </div>
                         </div>
                     </div>
@@ -72,30 +72,19 @@
 </template>
 <script>
 export default {
-    props: {
-        question_data: {
-            type: Object,
-            default: function(question) {
-                console.log(question.idQuestion);
-                // idQuestion, headQuestion, type, discipline
+    props: ["questionData"],
+    data() {
+        return {
+            question: {
+                idQuestion: String,
+                headQuestion: String,
+                type: String,
+                discipline: String
             }
-        },
-        data() {
-            return {
-                question: {
-                    idQuestion: String,
-                    headQuestion: String,
-                    type: String,
-                    discipline: String
-                }
-            };
-        },
-        methods: {
-            handleQuestion(question) {
-                console.log(question.idQuestion);
-                // idQuestion, headQuestion, type, discipline
-            }
-        }
+        };
+    },
+    created: function() {
+        console.log(this.$props.questionData);
     }
 };
 </script>

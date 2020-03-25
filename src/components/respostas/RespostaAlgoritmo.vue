@@ -13,7 +13,7 @@
                     <div class="columns">
                         <div class="column">
                             <div class="field">
-                                <!-- <label class="label has-text-left">{{question.headQuestion }}</label> -->
+                                <label class="label has-text-left">{{data.question.headQuestion }}</label>
                             </div>
                             <div class="colunm">
                                 <table
@@ -32,8 +32,8 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <!-- <td>{{question.input}}</td>
-                                            <td>{{question.output}}</td>-->
+                                            <td>{{data.question.input}}</td>
+                                            <td>{{data.question.output}}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -42,12 +42,12 @@
                                 <div class="field">
                                     <label class="label has-text-left">Resposta:</label>
                                 </div>
-                                <!-- <textarea
+                                <textarea
                                     class="textarea is-primary"
                                     rows="10"
                                     placeholder="Digite aqui o seu algoritmo resposta..."
                                     v-model="answerQuestion"
-                                ></textarea>-->
+                                ></textarea>
                             </div>
                         </div>
                     </div>
@@ -56,13 +56,7 @@
             <footer class="card-footer">
                 <div class="field is-grouped" style="margin-left:26%; margin-top:2%">
                     <p class="control">
-                        <button class="button is-light">Voltar</button>
-                    </p>
-                    <p class="control">
-                        <button class="button is-dark">Pular</button>
-                    </p>
-                    <p class="control">
-                        <button class="button is-black">Enviar</button>
+                        <button class="button is-black" @click="submitQuestion">Enviar</button>
                     </p>
                 </div>
             </footer>
@@ -71,20 +65,68 @@
     <!-- CARD INPUTS end -->
 </template>
 <script>
+const BASE_API = "http://127.0.0.1:8000/api";
 export default {
     props: ["questionData"],
     data() {
         return {
-            question: {
-                idQuestion: String,
-                headQuestion: String,
-                type: String,
-                discipline: String
-            }
+            data: {
+                idCodeAnswer: "",
+                question: {
+                    idQuestion: "",
+                    headQuestion: "",
+                    typeQuestion: "",
+                    get_typeQuestion_display: "",
+                    discipline: ""
+                },
+                inputCode: "",
+                outputCode: ""
+            },
+            answerQuestion: ""
         };
     },
+    methods: {
+        updateData(data) {
+            this.data = {
+                idCodeAnswer: data.idCodeAnswer,
+                question: {
+                    idQuestion: data.question.idQuestion,
+                    headQuestion: data.question.headQuestion,
+                    typeQuestion: data.question.typeQuestion,
+                    get_typeQuestion_display:
+                        data.question.get_typeQuestion_display,
+                    discipline: data.question.discipline
+                },
+                inputCode: data.inputCode,
+                outputCode: data.outputCode
+            };
+        },
+        submitQuestion() {
+            this.saveQuestion();
+        },
+        async saveQuestion() {
+            console.log(
+                "Salvando resposta " +
+                    answerQuestion +
+                    ", para questão " +
+                    question.idQuestion +
+                    " em background!"
+            );
+        }
+    },
     created: function() {
-        console.log(this.$props.questionData);
+        this.$axios
+            .get(
+                `${BASE_API}/questions/${this.$props.questionData.idQuestion}/codes`
+            )
+            .then(response => {
+                console.log(response.data.results);
+                this.updateData(response.data.results);
+            })
+            .catch(error => {
+                console.log(error);
+                // this.$router.push({ path: "/tests" });
+            });
     }
 };
 </script>

@@ -1,10 +1,9 @@
 <template>
     <form-wizard title subtitle>
         <div v-for="question in questions" :key="question.idQuestion">
-            <tab-content :title="question.headQuestion">
+            <tab-content title>
                 <div v-if="question.typeQuestion == 2">
-                    questão algoritmo
-                    <!-- <RespostaAlgoritmo v-bind:questionData="question"></RespostaAlgoritmo> -->
+                    <RespostaAlgoritmo v-bind:questionData="question"></RespostaAlgoritmo>
                 </div>
                 <div v-else-if="question.typeQuestion == 0">questão objetiva</div>
                 <div v-else-if="question.typeQuestion == 1">questão subjetiva</div>

@@ -33,24 +33,24 @@ export const router = new VueRouter({
       path: "/testesP",
       component: TesteProfessorCardView
     },
-    {
-      path: "/resposta-algoritmo",
-      component: RespostaAlgoritmo
-    },
-    {
-      path: "/resposta-subjetiva",
-      component: RespostaSubjetiva
-    },
-    {
-      path: "/resposta-objetiva",
-      component: RespostaObjetiva
-    },
+    // {
+    //   path: "/resposta-algoritmo",
+    //   component: RespostaAlgoritmo
+    // },
+    // {
+    //   path: "/resposta-subjetiva",
+    //   component: RespostaSubjetiva
+    // },
+    // {
+    //   path: "/resposta-objetiva",
+    //   component: RespostaObjetiva
+    // },
     {
       path: "/resultado",
       component: Resultado
     },
     {
-      path: "/questionario",
+      path: "/evaluation",
       component: Questionario
     }
   ]

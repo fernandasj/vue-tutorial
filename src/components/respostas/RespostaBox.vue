@@ -1,15 +1,15 @@
 <template>
-    <form-wizard>
-        <tab-content
-            v-for="question in questions"
-            :key="question.idCodeAnswer"
-            title="Personal details"
-        >
-            <div v-if="question.type == 'Algoritmo'">
-                <RespostaAlgoritmo :question_data="question"></RespostaAlgoritmo>
+    <form-wizard title subtitle step-size="xs" @on-complete="onComplete" color="#363636">
+        <tab-content title v-for="question in questions" :key="question.idQuestion">
+            <div v-if="question.typeQuestion == 2">
+                <RespostaAlgoritmo v-bind:questionData="question" />
             </div>
-            <div v-else-if="question.type == 'Objetiva'"></div>
-            <div v-else-if="question.type == 'Subjetiva'"></div>
+            <div v-else-if="question.typeQuestion == 0">
+                <RespostaObjetiva v-bind:questionData="question" />
+            </div>
+            <div v-else-if="question.typeQuestion == 1">
+                <RespostaSubjetiva v-bind:questionData="question" />
+            </div>
         </tab-content>
     </form-wizard>
 </template>
@@ -19,7 +19,7 @@ import RespostaAlgoritmo from "./RespostaAlgoritmo";
 import RespostaObjetiva from "./RespostaObjetiva";
 import RespostaSubjetiva from "./RespostaSubjetiva";
 
-import "vue-form-wizard/dist/vue-form-wizard.min.css";
+const API_BASE_URL = "http://127.0.0.1:8000/api";
 
 export default {
     components: {
@@ -31,23 +31,32 @@ export default {
     },
     data() {
         return {
-            questions: [
-                {
-                    idCodeAnswer: "fada0715-123b-4753-954f-182e4fe1881f",
-                    question: {
-                        idQuestion: "e112a58a-25f1-46ca-8d48-d29b42cc5897",
-                        headQuestion: "olha lá",
-                        type: "Algoritmo",
-                        discipline: "991eadd2-ea2a-4fe1-a598-36598e945408"
-                    },
-                    inputCode: "3 2",
-                    outputCode: "5"
-                }
-            ]
+            questions: []
         };
     },
-    created() {
-        this.$emit("created");
+    methods: {
+        updateData(data) {
+            this.questions = data.questions;
+        },
+        onComplete: function() {
+            alert("Yay. Done!");
+        }
+    },
+    created: function() {
+        this.$axios
+            // .get("http://localhost:8000/test")
+            .get(`${API_BASE_URL}/tests/${this.$route.query.test}`)
+            .then(response => {
+                console.log(response.data.questions);
+                this.updateData(response.data);
+            })
+            .catch(error => {
+                console.log(error);
+                alert(
+                    "Test " + this.$route.query.test + " não foi encontrado."
+                );
+                this.$router.push({ path: "/tests" });
+            });
     }
 };
 </script>

@@ -29,6 +29,14 @@
                                         <span>Done</span>
                                     </button>
                                 </p>
+                                <p class="control" v-else>
+                                    <button
+                                        v-on:click="onTest(testStudents.idTest)"
+                                        class="button is-small is-warning"
+                                    >
+                                        <span>Abrir</span>
+                                    </button>
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -63,6 +71,13 @@ export default {
                 .catch(error => {
                     console.log(error);
                 });
+        },
+        onTest(idTest) {
+            console.log(idTest);
+
+            this.$router.push({
+                path: `/evaluation?test=${idTest}`
+            });
         }
     }
 };

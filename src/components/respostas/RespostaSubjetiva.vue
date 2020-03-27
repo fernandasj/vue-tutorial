@@ -76,7 +76,7 @@ export default {
                 `${API_BASE_URL}/questions/${this.$props.questionData.idQuestion}/choices`
             )
             .then(response => {
-                this.updateData(response.data);
+                this.updateData(response.data.results);
             })
             .catch(error => {
                 console.log(error);

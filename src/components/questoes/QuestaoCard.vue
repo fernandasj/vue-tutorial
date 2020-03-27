@@ -75,7 +75,6 @@ import QuestaoObjetiva from "./QuestaoObjetiva";
 import QuestaoSubjetiva from "./QuestaoSubjetiva";
 import QuestaoAlgoritmo from "./QuestaoAlgoritmo";
 
-// const API_BASE_URL = "http://32173c57.ngrok.io/api";
 const API_BASE_URL = "http://127.0.0.1:8000/api";
 
 export default {

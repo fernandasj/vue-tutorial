@@ -34,7 +34,11 @@
             <footer class="card-footer">
                 <div class="field is-grouped" style="margin-left:26%; margin-top:2%">
                     <p class="control">
-                        <button class="button is-black" v-on:click="onSubmitAnswer">Enviar</button>
+                        <button
+                            class="button is-black"
+                            v-on:click="onSubmitAnswer"
+                            :disabled="blockButton"
+                        >Enviar</button>
                     </p>
                 </div>
             </footer>
@@ -44,7 +48,6 @@
 </template>
 <script>
 const API_BASE_URL = "http://127.0.0.1:8000/api";
-// const API_BASE_URL = "http://32173c57.ngrok.io/api";
 export default {
     props: ["questionData"],
     data() {
@@ -58,11 +61,13 @@ export default {
                     discipline: ""
                 }
             },
-            answerQuestion: ""
+            answerQuestion: "",
+            blockButton: false
         };
     },
     methods: {
         onSubmitAnswer() {
+            this.blockButton = true;
             this.saveQuestion();
         },
         async saveQuestion() {

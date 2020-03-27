@@ -1,5 +1,12 @@
 <template>
-    <form-wizard title subtitle step-size="xs" @on-complete="onComplete" color="#363636">
+    <form-wizard
+        v-if="testNotFound"
+        title
+        subtitle
+        step-size="xs"
+        @on-complete="onComplete"
+        color="#363636"
+    >
         <tab-content title v-for="question in questions" :key="question.idQuestion">
             <div v-if="question.typeQuestion == 2">
                 <RespostaAlgoritmo v-bind:questionData="question" />
@@ -19,8 +26,7 @@ import RespostaAlgoritmo from "./RespostaAlgoritmo";
 import RespostaObjetiva from "./RespostaObjetiva";
 import RespostaSubjetiva from "./RespostaSubjetiva";
 
-const API_BASE_URL = "http://32173c57.ngrok.io/api";
-// const API_BASE_URL = "http://127.0.0.1:8000/api";
+const API_BASE_URL = "http://127.0.0.1:8000/api";
 
 export default {
     components: {
@@ -32,7 +38,8 @@ export default {
     },
     data() {
         return {
-            questions: []
+            questions: [],
+            testNotFound: false
         };
     },
     methods: {
@@ -40,18 +47,19 @@ export default {
             this.questions = data.questions;
         },
         onComplete: function() {
-            alert("Yay. Done!");
+            alert("Yay. Test Done!");
+            this.$router.push({ path: "/tests" });
         }
     },
     created: function() {
         this.$axios
-            // .get("http://localhost:8000/test")
             .get(`${API_BASE_URL}/tests/${this.$route.query.test}`)
             .then(response => {
                 console.log(response.data.questions);
                 this.updateData(response.data);
             })
             .catch(error => {
+                this.testNotFound = true;
                 console.log(error);
                 alert(
                     "Test " + this.$route.query.test + " não foi encontrado."

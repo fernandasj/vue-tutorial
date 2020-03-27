@@ -19,7 +19,7 @@ import RespostaAlgoritmo from "./RespostaAlgoritmo";
 import RespostaObjetiva from "./RespostaObjetiva";
 import RespostaSubjetiva from "./RespostaSubjetiva";
 
-const API_BASE_URL = "http://127.0.0.1:8000";
+const API_BASE_URL = "http://127.0.0.1:8000/api";
 
 export default {
     components: {
@@ -44,6 +44,7 @@ export default {
     },
     created: function() {
         this.$axios
+            // .get("http://localhost:8000/test")
             .get(`${API_BASE_URL}/tests/${this.$route.query.test}`)
             .then(response => {
                 console.log(response.data.questions);
@@ -51,7 +52,6 @@ export default {
             })
             .catch(error => {
                 console.log(error);
-                const data = [];
                 alert(
                     "Test " + this.$route.query.test + " não foi encontrado."
                 );

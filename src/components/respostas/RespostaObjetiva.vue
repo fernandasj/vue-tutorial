@@ -20,7 +20,13 @@
                                     <div class="control">
                                         <div v-for="alternative in data.alternatives">
                                             <label class="radio">
-                                                <input type="radio" name="alternativas" />
+                                                <input
+                                                    type="radio"
+                                                    name="alternativas"
+                                                    :value="alternative.idChoice"
+                                                    v-model="answerQuestion"
+                                                    required
+                                                />
                                                 {{alternative.textChoice}}
                                             </label>
                                             <br />
@@ -35,7 +41,7 @@
             <footer class="card-footer">
                 <div class="field is-grouped" style="margin-left:26%; margin-top:2%">
                     <p class="control">
-                        <button class="button is-black">Enviar</button>
+                        <button class="button is-black" v-on:click="onSubmitAnswer">Enviar</button>
                     </p>
                 </div>
             </footer>
@@ -76,15 +82,16 @@ export default {
                 alternatives: alternatives
             };
         },
-        submitQuestion() {
+        onSubmitAnswer() {
             this.saveQuestion();
         },
         async saveQuestion() {
+            // TODO: enviar resposta para API
             console.log(
                 "Salvando resposta " +
-                    answerQuestion +
+                    this.answerQuestion +
                     ", para questão " +
-                    question.idQuestion +
+                    this.data.question.idQuestion +
                     " em background!"
             );
         }

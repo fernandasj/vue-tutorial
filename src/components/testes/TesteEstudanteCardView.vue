@@ -57,9 +57,10 @@ export default {
             tests: null
         };
     },
-    mounted() {
+    created: function() {
         this.getTests();
     },
+
     methods: {
         getTests() {
             this.$axios

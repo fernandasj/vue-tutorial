@@ -24,6 +24,7 @@
                                     rows="5"
                                     placeholder="Digite aqui o seu texto resposta..."
                                     v-model="answerQuestion"
+                                    required
                                 ></textarea>
                             </div>
                         </div>
@@ -33,7 +34,7 @@
             <footer class="card-footer">
                 <div class="field is-grouped" style="margin-left:26%; margin-top:2%">
                     <p class="control">
-                        <button class="button is-black">Enviar</button>
+                        <button class="button is-black" v-on:click="onSubmitAnswer">Enviar</button>
                     </p>
                 </div>
             </footer>
@@ -58,6 +59,21 @@ export default {
             },
             answerQuestion: ""
         };
+    },
+    methods: {
+        onSubmitAnswer() {
+            this.saveQuestion();
+        },
+        async saveQuestion() {
+            // TODO: enviar resposta para API
+            console.log(
+                "Salvando resposta " +
+                    this.answerQuestion +
+                    ", para questão " +
+                    this.data.question.idQuestion +
+                    " em background!"
+            );
+        }
     },
     created: function() {
         this.data = {

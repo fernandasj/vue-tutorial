@@ -44,9 +44,10 @@
                                 </div>
                                 <textarea
                                     class="textarea is-primary"
-                                    rows="10"
+                                    rows="5"
                                     placeholder="Digite aqui o seu algoritmo resposta..."
                                     v-model="answerQuestion"
+                                    required
                                 ></textarea>
                             </div>
                         </div>
@@ -56,7 +57,7 @@
             <footer class="card-footer">
                 <div class="field is-grouped" style="margin-left:26%; margin-top:2%">
                     <p class="control">
-                        <button class="button is-black">Enviar</button>
+                        <button class="button is-black" v-on:click="onSubmitAnswer">Enviar</button>
                     </p>
                 </div>
             </footer>
@@ -65,7 +66,7 @@
     <!-- CARD INPUTS end -->
 </template>
 <script>
-const BASE_API = "http://127.0.0.1:8000/api";
+const API_BASE_URL = "http://127.0.0.1:8000/api";
 export default {
     props: ["questionData"],
     data() {
@@ -101,15 +102,16 @@ export default {
                 outputCode: data.outputCode
             };
         },
-        submitQuestion() {
+        onSubmitAnswer() {
             this.saveQuestion();
         },
         async saveQuestion() {
+            // TODO: enviar resposta para API
             console.log(
                 "Salvando resposta " +
-                    answerQuestion +
+                    this.answerQuestion +
                     ", para questão " +
-                    question.idQuestion +
+                    this.data.question.idQuestion +
                     " em background!"
             );
         }
@@ -117,7 +119,7 @@ export default {
     created: function() {
         this.$axios
             .get(
-                `${BASE_API}/questions/${this.$props.questionData.idQuestion}/codes`
+                `${API_BASE_URL}/questions/${this.$props.questionData.idQuestion}/codes`
             )
             .then(response => {
                 console.log(response.data.results);
@@ -125,7 +127,6 @@ export default {
             })
             .catch(error => {
                 console.log(error);
-                // this.$router.push({ path: "/tests" });
             });
     }
 };

@@ -75,6 +75,8 @@ import QuestaoObjetiva from "./QuestaoObjetiva";
 import QuestaoSubjetiva from "./QuestaoSubjetiva";
 import QuestaoAlgoritmo from "./QuestaoAlgoritmo";
 
+const API_BASE_URL = "http://127.0.0.1:8000/api";
+
 export default {
     name: "questao-card",
     components: {
@@ -133,7 +135,7 @@ export default {
         },
         getDisciplines() {
             this.$axios
-                .get("http://127.0.0.1:8000/api/disciplines/")
+                .get(`${API_BASE_URL}/disciplines/`)
                 .then(response => {
                     console.log(response);
                     this.disciplines = response.data.results;
@@ -150,7 +152,7 @@ export default {
             console.log(codes[0]["input"]);
             let currentObj = this;
             this.$axios
-                .post("http://localhost:8000/api/questions/", {
+                .post(`${API_BASE_URL}/api/questions/`, {
                     headQuestion: this.headQuestion,
                     typeQuestion: this.type,
                     discipline: this.discipline,

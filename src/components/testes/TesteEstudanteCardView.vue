@@ -21,14 +21,14 @@
                                 </p>
                                 <p class="control is-expanded">{{ testStudents.name }}</p>
                                 <p class="control is-expanded">{{ testStudents.discipline }}</p>
-                                <!-- <p class="control" v-if="testStudents.timeFinish != null">
+                                <p class="control" v-if="testStudents.timeFinish != null">
                                     <button class="button is-small is-success">
                                         <span class="icon is-small">
                                             <i class="fas fa-check"></i>
                                         </span>
                                         <span>Done</span>
                                     </button>
-                                </p> -->
+                                </p>
                                 <p class="control" v-else>
                                     <button
                                         v-on:click="onTest(testStudents.idTest)"

@@ -86,18 +86,6 @@ export default {
                 discipline: this.$props.questionData.discipline
             }
         };
-        this.$axios
-            .get(
-                // "http://localhost:8000/alternatives"
-                `${API_BASE_URL}/questions/${this.$props.questionData.idQuestion}/choices`
-            )
-            .then(response => {
-                this.updateData(response.data.results);
-            })
-            .catch(error => {
-                console.log(error);
-                // this.$router.push({ path: "/tests" });
-            });
     }
 };
 </script>

@@ -3,10 +3,14 @@
         <div v-for="question in questions" :key="question.idQuestion">
             <tab-content title>
                 <div v-if="question.typeQuestion == 2">
-                    <RespostaAlgoritmo v-bind:questionData="question"></RespostaAlgoritmo>
+                    <RespostaAlgoritmo v-bind:questionData="question" />
                 </div>
-                <div v-else-if="question.typeQuestion == 0">questão objetiva</div>
-                <div v-else-if="question.typeQuestion == 1">questão subjetiva</div>
+                <div v-else-if="question.typeQuestion == 0">
+                    <RespostaObjetiva v-bind:questionData="question" />
+                </div>
+                <div v-else-if="question.typeQuestion == 1">
+                    <RespostaSubjetiva v-bind:questionData="question" />
+                </div>
             </tab-content>
         </div>
     </form-wizard>

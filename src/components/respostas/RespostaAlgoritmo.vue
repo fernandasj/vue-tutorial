@@ -56,7 +56,7 @@
             <footer class="card-footer">
                 <div class="field is-grouped" style="margin-left:26%; margin-top:2%">
                     <p class="control">
-                        <button class="button is-black" @click="submitQuestion">Enviar</button>
+                        <button class="button is-black">Enviar</button>
                     </p>
                 </div>
             </footer>

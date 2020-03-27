@@ -32,8 +32,8 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>{{data.question.input}}</td>
-                                            <td>{{data.question.output}}</td>
+                                            <td>{{data.question.inputCode}}</td>
+                                            <td>{{data.question.outputCode}}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -67,6 +67,7 @@
 </template>
 <script>
 const API_BASE_URL = "http://127.0.0.1:8000/api";
+// const API_BASE_URL = "http://32173c57.ngrok.io/api";
 export default {
     props: ["questionData"],
     data() {
@@ -78,10 +79,10 @@ export default {
                     headQuestion: "",
                     typeQuestion: "",
                     get_typeQuestion_display: "",
-                    discipline: ""
-                },
-                inputCode: "",
-                outputCode: ""
+                    discipline: "",
+                    inputCode: "",
+                    outputCode: ""
+                }
             },
             answerQuestion: ""
         };
@@ -96,11 +97,12 @@ export default {
                     typeQuestion: data.question.typeQuestion,
                     get_typeQuestion_display:
                         data.question.get_typeQuestion_display,
-                    discipline: data.question.discipline
-                },
-                inputCode: data.inputCode,
-                outputCode: data.outputCode
+                    discipline: data.question.discipline,
+                    inputCode: data.inputCode,
+                    outputCode: data.outputCode
+                }
             };
+            console.log(this.data.question);
         },
         onSubmitAnswer() {
             this.saveQuestion();
@@ -122,8 +124,7 @@ export default {
                 `${API_BASE_URL}/questions/${this.$props.questionData.idQuestion}/codes`
             )
             .then(response => {
-                console.log(response.data.results);
-                this.updateData(response.data.results);
+                this.updateData(response.data[0]);
             })
             .catch(error => {
                 console.log(error);

@@ -15,6 +15,7 @@
                                 type="email"
                                 placeholder="Email"
                                 v-model="userLogin.email"
+                                required
                             />
                             <span class="icon is-small is-left">
                                 <i class="fas fa-envelope"></i>
@@ -28,6 +29,7 @@
                                 type="password"
                                 placeholder="Password"
                                 v-model="userLogin.password"
+                                required
                             />
                             <span class="icon is-small is-left">
                                 <i class="fas fa-lock"></i>
@@ -93,16 +95,14 @@ export default {
             }
         }
     },
-    created: {
-        function() {
-            const userLogin = {
-                email: null,
-                password: null,
-                userType: null,
-                loggedIn: false
-            };
-            this.$store.dispatch("loginDataAction", userLogin);
-        }
+    created() {
+        const userLogin = {
+            email: null,
+            password: null,
+            userType: null,
+            loggedIn: false
+        };
+        this.$store.dispatch("loginDataAction", userLogin);
     }
 };
 </script>

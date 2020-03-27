@@ -27,6 +27,7 @@ import RespostaObjetiva from "./RespostaObjetiva";
 import RespostaSubjetiva from "./RespostaSubjetiva";
 
 const API_BASE_URL = "http://127.0.0.1:8000/api";
+// const API_BASE_URL = "http://32173c57.ngrok.io/api";
 
 export default {
     components: {
@@ -44,6 +45,7 @@ export default {
     },
     methods: {
         updateData(data) {
+            this.testNotFound = true;
             this.questions = data.questions;
         },
         onComplete: function() {
@@ -59,7 +61,6 @@ export default {
                 this.updateData(response.data);
             })
             .catch(error => {
-                this.testNotFound = true;
                 console.log(error);
                 alert(
                     "Test " + this.$route.query.test + " não foi encontrado."

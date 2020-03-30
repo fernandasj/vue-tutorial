@@ -9,7 +9,7 @@
     >
         <tab-content title v-for="question in questions" :key="question.idQuestion">
             <div v-if="question.typeQuestion == 2">
-                <RespostaAlgoritmo v-bind:questionData="question" />
+                <RespostaAlgoritmo :questionData="question" :idTest="idTest" />
             </div>
             <div v-else-if="question.typeQuestion == 0">
                 <RespostaObjetiva v-bind:questionData="question" />
@@ -26,8 +26,8 @@ import RespostaAlgoritmo from "./RespostaAlgoritmo";
 import RespostaObjetiva from "./RespostaObjetiva";
 import RespostaSubjetiva from "./RespostaSubjetiva";
 
-const API_BASE_URL = "http://127.0.0.1:8000/api";
-// const API_BASE_URL = "http://32173c57.ngrok.io/api";
+// const API_BASE_URL = "http://127.0.0.1:8000/api";
+const API_BASE_URL = "http://29628cc3.ngrok.io/api";
 
 export default {
     components: {
@@ -39,6 +39,7 @@ export default {
     },
     data() {
         return {
+            idTest: "",
             questions: [],
             testNotFound: false
         };
@@ -54,6 +55,7 @@ export default {
         }
     },
     created: function() {
+        this.idTest = this.$route.query.test;
         this.$axios
             .get(`${API_BASE_URL}/tests/${this.$route.query.test}`)
             .then(response => {

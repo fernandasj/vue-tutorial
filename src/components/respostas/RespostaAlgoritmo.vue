@@ -70,10 +70,10 @@
     <!-- CARD INPUTS end -->
 </template>
 <script>
-const API_BASE_URL = "http://127.0.0.1:8000/api";
-// const API_BASE_URL = "http://32173c57.ngrok.io/api";
+// const API_BASE_URL = "http://127.0.0.1:8000/api";
+// const API_BASE_URL = "http://29628cc3.ngrok.io/api";
 export default {
-    props: ["questionData"],
+    props: ["questionData", "idTest"],
     data() {
         return {
             data: {

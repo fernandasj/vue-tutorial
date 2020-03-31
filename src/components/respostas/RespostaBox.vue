@@ -12,10 +12,10 @@
                 <RespostaAlgoritmo v-bind:questionData="question" :idTest="idTest"/>
             </div>
             <div v-else-if="question.typeQuestion == 0">
-                <RespostaObjetiva v-bind:questionData="question" />
+                <RespostaObjetiva v-bind:questionData="question" :idTest="idTest"/>
             </div>
             <div v-else-if="question.typeQuestion == 1">
-                <RespostaSubjetiva v-bind:questionData="question" />
+                <RespostaSubjetiva v-bind:questionData="question" :idTest="idTest"/>
             </div>
         </tab-content>
     </form-wizard>

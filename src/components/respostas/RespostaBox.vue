@@ -50,8 +50,22 @@ export default {
             this.questions = data.questions;
         },
         onComplete: function() {
-            alert("Yay. Test Done!");
-            this.$router.push({ path: "/tests" });
+            // alert("Yay. Test Done!");
+            this.$axios
+                .post(`${API_BASE_URL}/testStudents/`, {
+                    test: this.idTest,
+                    student: "02c68c7b-cbd0-4a92-8ce8-6af130b4ae9f",
+                    timeFinish: new Date(),
+                })
+                .then(response => {
+                    console.log(response);
+
+                })
+                .catch(function(error) {
+                    console.log(error);
+                    this.$router.push({ path: "/tests" });
+                });
+            this.$router.push({ path: "/resultado" });
         }
     },
     created: function() {

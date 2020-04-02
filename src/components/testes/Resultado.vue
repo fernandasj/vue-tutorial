@@ -8,27 +8,27 @@
     <div class="card-content">
       <section class="card-body">
         <div class="content">
+        <div v-for="result in results">
           <div class="field has-text-left">
             <h3 class="has-text-centered">
-              Avaliação de Algoritmos
+              {{result.test.name}}
             </h3>
             <p>
-              <b>Aluno(a):</b> Fernanda da Silva Vieira
+              <b>Aluno(a):</b> {{result.student.name}}
             </p>
             <p>
               <b>Professor(a):</b> Gustavo Soares Vieira
             </p>
             <p>
-              <b>Disciplina:</b> Algoritmos
+              <b>Disciplina:</b> {{result.test.discipline}}
             </p>
           </div>
           <div class="tile is-vertical is-4" style="margin-left: 33%">
             <article class="tile is-child notification is-dark">
               <p class="subtitle is-3">Nota</p>
-              <p class="title is-1">40</p>
+              <p class="title is-1">{{result.scores}}</p>
             </article>
           </div>
-
           <table class="table is-bordered" style="margin-top: 4%">
             <thead>
               <tr>
@@ -44,53 +44,18 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>Questão 1</td>
-                <td>Algoritmo</td>
+              <tr v-for="question in result.test.questions">
+                <td>{{question.headQuestion}}</td>
+                <td>{{question.get_typeQuestion_display}}</td>
                 <td>
                   <span class="tag is-dark">
                     <b>Correta</b>
-                  </span>
-                </td>
-              </tr>
-              <tr>
-                <td>Questão 2</td>
-                <td>Algoritmo</td>
-                <td>
-                  <span class="tag is-dark">
-                    <b>Em progresso</b>
-                  </span>
-                </td>
-              </tr>
-              <tr>
-                <td>Questão 3</td>
-                <td>Objetiva</td>
-                <td>
-                  <span class="tag is-dark">
-                    <b>Correta</b>
-                  </span>
-                </td>
-              </tr>
-              <tr>
-                <td>Questão 4</td>
-                <td>Subjetiva</td>
-                <td>
-                  <span class="tag is-dark">
-                    <b>Em progresso</b>
-                  </span>
-                </td>
-              </tr>
-              <tr>
-                <td>Questão 5</td>
-                <td>Objetiva</td>
-                <td>
-                  <span class="tag is-dark">
-                    <b>Incorreta</b>
                   </span>
                 </td>
               </tr>
             </tbody>
           </table>
+        </div>
         </div>
       </section>
       <footer class="card-footer">
@@ -105,7 +70,33 @@
   <!-- CARD INPUTS end -->
 </template>
 <script>
-export default {};
+const API_BASE_URL = "http://127.0.0.1:8000/api";
+
+export default {
+    name: "resultado",
+    data() {
+        return {
+          results: [],
+        };
+    },
+    mounted() {
+        this.getResults();
+    },
+    methods: {
+        getResults() {
+            let student = "02c68c7b-cbd0-4a92-8ce8-6af130b4ae9f"
+            this.$axios
+                .get(`${API_BASE_URL}/testStudents/`+ student + "/result/")
+                .then(response => {
+                    console.log(response);
+                    this.results = response.data;
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+        }
+    }
+};
 </script>
 <style>
 </style>

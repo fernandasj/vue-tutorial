@@ -9,13 +9,13 @@
     >
         <tab-content title v-for="question in questions" :key="question.idQuestion">
             <div v-if="question.typeQuestion == 2">
-                <RespostaAlgoritmo v-bind:questionData="question" :idTest="idTest"/>
+                <RespostaAlgoritmo v-bind:questionData="question" :idTest="idTest" />
             </div>
             <div v-else-if="question.typeQuestion == 0">
-                <RespostaObjetiva v-bind:questionData="question" :idTest="idTest"/>
+                <RespostaObjetiva v-bind:questionData="question" :idTest="idTest" />
             </div>
             <div v-else-if="question.typeQuestion == 1">
-                <RespostaSubjetiva v-bind:questionData="question" :idTest="idTest"/>
+                <RespostaSubjetiva v-bind:questionData="question" :idTest="idTest" />
             </div>
         </tab-content>
     </form-wizard>
@@ -25,9 +25,6 @@ import { FormWizard, TabContent } from "vue-form-wizard";
 import RespostaAlgoritmo from "./RespostaAlgoritmo";
 import RespostaObjetiva from "./RespostaObjetiva";
 import RespostaSubjetiva from "./RespostaSubjetiva";
-
-const API_BASE_URL = "http://127.0.0.1:8000/api";
-// const API_BASE_URL = "http://32173c57.ngrok.io/api";
 
 export default {
     components: {
@@ -41,7 +38,7 @@ export default {
         return {
             idTest: "",
             questions: [],
-            testNotFound: false,
+            testNotFound: false
         };
     },
     methods: {
@@ -52,14 +49,13 @@ export default {
         onComplete: function() {
             // alert("Yay. Test Done!");
             this.$axios
-                .post(`${API_BASE_URL}/testStudents/`, {
+                .post(`${this.$env.SERVER_URI}/testStudents/`, {
                     test: this.idTest,
                     student: "02c68c7b-cbd0-4a92-8ce8-6af130b4ae9f",
-                    timeFinish: new Date(),
+                    timeFinish: new Date()
                 })
                 .then(response => {
                     console.log(response);
-
                 })
                 .catch(function(error) {
                     console.log(error);
@@ -71,7 +67,7 @@ export default {
     created: function() {
         this.idTest = this.$route.query.test;
         this.$axios
-            .get(`${API_BASE_URL}/tests/${this.$route.query.test}`)
+            .get(`${this.$env.SERVER_URI}/tests/${this.$route.query.test}`)
             .then(response => {
                 console.log(response.data.questions);
                 this.updateData(response.data);

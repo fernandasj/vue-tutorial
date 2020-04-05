@@ -83,8 +83,6 @@
 <script>
 import QuestaoCard from "./QuestaoCard";
 
-const API_BASE_URL = "http://127.0.0.1:8000/api";
-
 export default {
     name: "questao-view-card",
     components: {
@@ -112,7 +110,7 @@ export default {
         },
         getQuestions() {
             this.$axios
-                .get(`${API_BASE_URL}/questions/`)
+                .get(`${this.$env.SERVER_URI}/questions/`)
                 .then(response => {
                     console.log(response);
                     this.questoes = response.data.results;
@@ -123,7 +121,7 @@ export default {
         },
         deleteQuestion(id) {
             this.$axios
-                .delete(`${API_BASE_URL}/questions/${id}`)
+                .delete(`${this.$env.SERVER_URI}/questions/${id}`)
                 .then(response => {
                     this.questoes.splice(id, 1);
                 })
@@ -133,7 +131,7 @@ export default {
         },
         editQuestion(id) {
             this.$axios
-                .get(`${API_BASE_URL}/questions/${id}`)
+                .get(`${this.$env.SERVER_URI}/questions/${id}`)
                 .then(response => {
                     this.editQuestion = response.data.results;
                 })

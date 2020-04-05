@@ -70,8 +70,6 @@
     <!-- CARD INPUTS end -->
 </template>
 <script>
-const API_BASE_URL = "http://127.0.0.1:8000/api";
-// const API_BASE_URL = "http://32173c57.ngrok.io/api";
 export default {
     props: ["questionData", "idTest"],
     data() {
@@ -116,12 +114,12 @@ export default {
         async saveQuestion() {
             // e.preventDefault();
             this.$axios
-                .post(`${API_BASE_URL}/answers/`, {
+                .post(`${this.$env.SERVER_URI}/answers/`, {
                     textAnswer: btoa(this.answerQuestion),
                     student: "02c68c7b-cbd0-4a92-8ce8-6af130b4ae9f",
                     test: this.idTest,
                     question: this.data.question.idQuestion,
-                    choice: "",
+                    choice: ""
                 })
                 .then(response => {
                     console.log(response);

@@ -56,8 +56,6 @@
     </div>
 </template>
 <script>
-const API_BASE_URL = "http://127.0.0.1:8000/api";
-
 export default {
     name: "questao-objetiva",
 
@@ -91,7 +89,7 @@ export default {
         submitChoices(id) {
             let currentObj = this;
             this.$axios
-                .post(`${API_BASE_URL}/choices/`, {
+                .post(`${this.$env.SERVER_URI}/choices/`, {
                     headQuestion: this.headQuestion,
                     typeQuestion: this.type,
                     discipline: this.discipline

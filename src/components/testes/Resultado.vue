@@ -49,7 +49,7 @@
                 <td>{{question.get_typeQuestion_display}}</td>
                 <td>
                   <span class="tag is-dark">
-                    <b>Correta</b>
+                    <b>correct</b>
                   </span>
                 </td>
               </tr>
@@ -86,7 +86,7 @@ export default {
         getResults() {
             let student = "02c68c7b-cbd0-4a92-8ce8-6af130b4ae9f"
             this.$axios
-                .get(`${API_BASE_URL}/testStudents/`+ student + "/result/")
+                .get(`${API_BASE_URL}/tests/`+ student + "/studentResult/")
                 .then(response => {
                     console.log(response);
                     this.results = response.data;

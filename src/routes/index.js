@@ -47,7 +47,7 @@ export const router = new VueRouter({
     // },
     {
       path: "/resultado",
-      component: Resultado
+      component: Resultado,
     },
     {
       path: "/evaluation",

@@ -68,7 +68,7 @@ export default {
                 .get(`${API_BASE_URL}/tests/`)
                 .then(response => {
                     console.log(response);
-                    this.tests = response.data.results;
+                    this.tests = response.data.results[0];
                 })
                 .catch(error => {
                     console.log(error);

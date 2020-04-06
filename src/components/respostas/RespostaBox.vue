@@ -65,7 +65,7 @@ export default {
                     console.log(error);
                     this.$router.push({ path: "/tests" });
                 });
-            this.$router.push({ path: "/resultado" });
+            this.$router.push({ path: "/resultado"});
         }
     },
     created: function() {

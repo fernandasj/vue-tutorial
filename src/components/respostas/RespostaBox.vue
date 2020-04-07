@@ -58,14 +58,14 @@ export default {
                     timeFinish: new Date(),
                 })
                 .then(response => {
-                    console.log(response);
+                    console.log(response.data.id);
+                    this.$router.push({ path: "/resultado/" + response.data.id });
 
                 })
                 .catch(function(error) {
                     console.log(error);
                     this.$router.push({ path: "/tests" });
                 });
-            this.$router.push({ path: "/resultado" });
         }
     },
     created: function() {

@@ -11,7 +11,7 @@
                 <div class="row">
                     <div class="columns">
                         <div class="column">
-                            <div class="field is-grouped" v-for="testStudents in tests">
+                            <div class="field is-grouped" v-for="test in tests">
                                 <p class="control">
                                     <a class="button is-dark is-small">
                                         <span class="icon is-small">
@@ -19,9 +19,9 @@
                                         </span>
                                     </a>
                                 </p>
-                                <p class="control is-expanded">{{ testStudents.name }}</p>
-                                <p class="control is-expanded">{{ testStudents.discipline }}</p>
-                                <p class="control" v-if="testStudents.timeFinish != null">
+                                <p class="control is-expanded">{{ test.name }}</p>
+                                <p class="control is-expanded">{{ test.discipline }}</p>
+                                <p class="control" v-if="test.timeFinish != null">
                                     <button class="button is-small is-success">
                                         <span class="icon is-small">
                                             <i class="fas fa-check"></i>
@@ -31,7 +31,7 @@
                                 </p>
                                 <p class="control" v-else>
                                     <button
-                                        v-on:click="onTest(testStudents.idTest)"
+                                        v-on:click="onTest(test.idTest)"
                                         class="button is-small is-warning"
                                     >
                                         <span>Abrir</span>

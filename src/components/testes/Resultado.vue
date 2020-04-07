@@ -8,19 +8,18 @@
     <div class="card-content">
       <section class="card-body">
         <div class="content">
-        <div v-for="result in results">
           <div class="field has-text-left">
             <h3 class="has-text-centered">
-              {{result.test.name}}
+              {{result.name}}
             </h3>
             <p>
-              <b>Aluno(a):</b> {{result.student.name}}
+              <b>Aluno(a):</b> {{result.student}}
             </p>
             <p>
               <b>Professor(a):</b> Gustavo Soares Vieira
             </p>
             <p>
-              <b>Disciplina:</b> {{result.test.discipline}}
+              <b>Disciplina:</b> {{result.discipline}}
             </p>
           </div>
           <div class="tile is-vertical is-4" style="margin-left: 33%">
@@ -44,18 +43,17 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="question in result.test.questions">
+              <tr v-for="question in result.questions">
                 <td>{{question.headQuestion}}</td>
-                <td>{{question.get_typeQuestion_display}}</td>
+                <td>{{question.typeQueston}}</td>
                 <td>
                   <span class="tag is-dark">
-                    <b>Correta</b>
+                    <b>{{question.correctAnswer}}</b>
                   </span>
                 </td>
               </tr>
             </tbody>
           </table>
-        </div>
         </div>
       </section>
       <footer class="card-footer">
@@ -76,20 +74,21 @@ export default {
     name: "resultado",
     data() {
         return {
-          results: [],
+          result: [],
         };
     },
     mounted() {
-        this.getResults();
+        this.getResult();
     },
     methods: {
-        getResults() {
-            let student = "02c68c7b-cbd0-4a92-8ce8-6af130b4ae9f"
+        getResult() {
+            // let student = "02c68c7b-cbd0-4a92-8ce8-6af130b4ae9f"
+            console.log(this.$route.params.id);
             this.$axios
-                .get(`${API_BASE_URL}/testStudents/`+ student + "/result/")
+                .get(`${API_BASE_URL}/testStudents/${this.$route.params.id}/result`)
                 .then(response => {
                     console.log(response);
-                    this.results = response.data;
+                    this.result = response.data;
                 })
                 .catch(error => {
                     console.log(error);

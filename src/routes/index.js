@@ -46,7 +46,7 @@ export const router = new VueRouter({
     //   component: RespostaObjetiva
     // },
     {
-      path: "/resultado",
+      path: "/resultado/:id",
       component: Resultado
     },
     {

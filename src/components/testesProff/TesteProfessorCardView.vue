@@ -29,9 +29,9 @@
                     </span>
                   </a>
                 </p>
-                <p class="control is-expanded">{{ teste.name }}</p>
-                <p class="control is-expanded">{{ teste.discipline }}</p>
-                <p class="control is-expanded">{{ teste.aplicationDate }}</p>
+                <p style="max-width: 25ch" class="control is-expanded">{{ teste.name }}</p>
+                <p style="max-width: 10ch" class="control is-expanded">{{ teste.discipline }}</p>
+                <p style="max-width: 10ch" class="control is-expanded">{{ teste.aplicationDate }}</p>
                 <p class="control">
                   <a class="button is-link is-small" style="border-radius: 50%;" v-on:click='oi(teste.idTest)'>
                     <span class="icon is-small">

@@ -164,7 +164,19 @@ export default {
             questions: this.addQuestoes.map(x => x.idQuestion),
         })
         .then(response => {
-          console.log(response);
+            console.log(response);
+            this.aplicationDate = ""
+            this.aplicationDateLimit = ""
+            this.name = ""
+            this.discipline = ""
+            this.headQuestion = ""
+            this.idQuestion = ""
+            this.getQuestao = ""
+            this.disciplines = null
+            this.questoes = null
+            this.questaoEdit = null
+            this.addQuestoes = []
+
         })
         .catch(function(error) {
           console.log(error);

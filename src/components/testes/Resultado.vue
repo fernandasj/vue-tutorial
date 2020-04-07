@@ -25,7 +25,7 @@
           <div class="tile is-vertical is-4" style="margin-left: 33%">
             <article class="tile is-child notification is-dark">
               <p class="subtitle is-3">Nota</p>
-              <p class="title is-1">{{result.scores}}</p>
+              <p class="title is-1">{{result.scores.toFixed(0)}}</p>
             </article>
           </div>
           <table class="table is-bordered" style="margin-top: 4%">
@@ -45,11 +45,23 @@
             <tbody>
               <tr v-for="question in result.questions">
                 <td>{{question.headQuestion}}</td>
-                <td>{{question.typeQueston}}</td>
+                <td>{{question.typeQuestion}}</td>
                 <td>
-                  <span class="tag is-dark">
-                    <b>{{question.correctAnswer}}</b>
-                  </span>
+                  <div v-if="(question.correctAnswer == false) && (question.typeQuestion == 'Subjetiva')">
+                    <span class="tag is-dark">
+                      <b>Em progresso</b>
+                    </span>
+                  </div>
+                  <div v-if="question.correctAnswer">
+                    <span class="tag is-dark">
+                      <b>Correta</b>
+                    </span>
+                  </div>
+                  <div v-if="(question.correctAnswer == false) && (question.typeQuestion != 'Subjetiva')">
+                    <span class="tag is-dark">
+                      <b>Incorreta</b>
+                    </span>
+                  </div>
                 </td>
               </tr>
             </tbody>
@@ -59,7 +71,7 @@
       <footer class="card-footer">
         <div class="field is-grouped" style="margin-left:42%; margin-top:2%">
           <p class="control">
-            <button class="button is-dark">Voltar</button>
+            <button v-on:click="back()" class="button is-dark">Voltar</button>
           </p>
         </div>
       </footer>
@@ -81,6 +93,9 @@ export default {
         this.getResult();
     },
     methods: {
+        back() {
+            this.$router.push({ path: "/tests" });
+        },
         getResult() {
             // let student = "02c68c7b-cbd0-4a92-8ce8-6af130b4ae9f"
             console.log(this.$route.params.id);

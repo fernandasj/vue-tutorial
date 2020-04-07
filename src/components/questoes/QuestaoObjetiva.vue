@@ -47,7 +47,7 @@
                 <select v-model="correctChoice" @change="onChange()">
                     <option value="1">Alternativa 1</option>
                     <option value="2">Alternativa 2</option>
-                    <option value="3">Alternativa 2</option>
+                    <option value="3">Alternativa 3</option>
                     <option value="4">Alternativa 4</option>
                     <option value="5">Alternativa 5</option>
                 </select>

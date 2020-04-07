@@ -100,6 +100,7 @@ export default {
     },
     methods: {
         formatList(choiceData) {
+          // if(choiceData != null) {
             const data = [
                 choiceData.alternatives.choice1,
                 choiceData.alternatives.choice2,
@@ -122,6 +123,9 @@ export default {
                 }
                 index++;
             });
+          // } else {
+          //   this.choices = ""
+          // }
         },
         destroy() {
             this.$emit("hide");
@@ -146,13 +150,17 @@ export default {
         },
         formSubmitQuestion(e) {
             e.preventDefault();
-            this.formatList(this.$store.getters.getChoiceData);
+            // console.log(this.typeQuestion)
+            if(this.type == "0"){
+              console.log("entrei")
+              this.formatList(this.$store.getters.getChoiceData);
+            }
 
             let codes = this.$refs.qstAlg.getData();
             console.log(codes[0]["input"]);
             let currentObj = this;
             this.$axios
-                .post(`${API_BASE_URL}/api/questions/`, {
+                .post(`${API_BASE_URL}/questions/`, {
                     headQuestion: this.headQuestion,
                     typeQuestion: this.type,
                     discipline: this.discipline,
@@ -162,6 +170,15 @@ export default {
                 })
                 .then(response => {
                     console.log(response);
+                    // this.$router.push({ path: "/questions" });
+                    this.headQuestion = ""
+                    this.typeQuestion = "-1"
+                    this.discipline = null
+                    this.input = null
+                    this.output = null
+                    // this.$router.go({ path: "/questions" })
+                    // this.$router.push({ path: "/questions" });
+
                 })
                 .catch(function(error) {
                     console.log(error);

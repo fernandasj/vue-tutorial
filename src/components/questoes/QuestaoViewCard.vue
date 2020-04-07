@@ -29,8 +29,8 @@
                                         </span>
                                     </a>
                                 </p>
-                                <p class="control is-expanded">{{ questao.headQuestion }}</p>
-                                <p
+                                <p style="max-width: 27ch" class="control is-expanded">{{ questao.headQuestion }}</p>
+                                <p style="max-width: 10ch"
                                     class="control is-expanded"
                                 >{{ questao.get_typeQuestion_display }}</p>
                                 <p class="control">

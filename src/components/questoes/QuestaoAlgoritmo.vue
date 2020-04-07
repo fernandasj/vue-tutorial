@@ -39,6 +39,10 @@ export default {
           {input: this.dataInput, output: this.dataOutput}
       ]
       return codeList
+    },
+    cleanData(){
+      this.dataInput = 0
+      this.dataOutput = 0
     }
   }
   // mounted (){

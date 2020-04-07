@@ -19,8 +19,8 @@
                                         </span>
                                     </a>
                                 </p>
-                                <p class="control is-expanded">{{ test.name }}</p>
-                                <p class="control is-expanded">{{ test.discipline }}</p>
+                                <p style="max-width: 20ch" class="control is-expanded">{{ test.name }}</p>
+                                <p style="max-width: 20ch" class="control is-expanded">{{ test.discipline }}</p>
                                 <p class="control" v-if="test.timeFinish != null">
                                     <button class="button is-small is-success">
                                         <span class="icon is-small">
